@@ -1,16 +1,16 @@
 import React from 'react';
 import { useStaticQuery, graphql, Link } from 'gatsby';
 import _ from 'lodash';
-import Img from 'gatsby-image';
+// import Img from 'gatsby-image';
 import FeaturePost from '../../components/feature-post/feature-post';
-import PromotionImage from '../../images/ad.png';
+// import PromotionImage from '../../images/ad.png';
 import {
   SidebarWrapper,
   SidebarWidget,
   WidgetTitle,
   TagItem,
-  InstagramWrapper,
-  InstagramPhoto,
+  // InstagramWrapper,
+  // InstagramPhoto,
 } from './style';
 
 type SidebarProps = {};
@@ -73,7 +73,7 @@ const Sidebar: React.FunctionComponent<SidebarProps> = () => {
 
   return (
     <SidebarWrapper>
-      <SidebarWidget>
+      {/* <SidebarWidget>
         <WidgetTitle>Promotion</WidgetTitle>
         <a
           href="https://1.envato.market/r1jdv"
@@ -82,7 +82,7 @@ const Sidebar: React.FunctionComponent<SidebarProps> = () => {
         >
           <img src={PromotionImage} alt="Get StoryHub" />
         </a>
-      </SidebarWidget>
+      </SidebarWidget> */}
 
       <SidebarWidget>
         <WidgetTitle>Latest Post</WidgetTitle>
@@ -135,7 +135,7 @@ const Sidebar: React.FunctionComponent<SidebarProps> = () => {
         ))}
       </SidebarWidget>
 
-      <SidebarWidget>
+      {/* <SidebarWidget>
         <WidgetTitle>Instagram</WidgetTitle>
         {InstagramPhotos ? (
           <InstagramWrapper>
@@ -177,7 +177,7 @@ const Sidebar: React.FunctionComponent<SidebarProps> = () => {
         ) : (
           ''
         )}
-      </SidebarWidget>
+      </SidebarWidget> */}
     </SidebarWrapper>
   );
 };

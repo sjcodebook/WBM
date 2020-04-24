@@ -4,12 +4,11 @@ require('dotenv').config({
 
 module.exports = {
   siteMetadata: {
-    title: `StoryHub`,
-    author: `Monnisa`,
-    about: `Breakfast procuring no end happiness allowance assurance frank. Met simplicity nor difficulty unreserved who. Entreaties mr conviction dissimilar me
-    astonished estimating cultivated.`,
+    title: `WebBrainsMedia`,
+    author: `Sanmati Kumar Jain`,
+    about: `jdjd`,
     description: `A Gatsby Blog`,
-    siteUrl: `https://storyhub-personal-tarex.redq.now.sh`,
+    siteUrl: `https://webbrainsmedia.com`,
   },
   plugins: [
     {
@@ -114,12 +113,12 @@ module.exports = {
     {
       resolve: `gatsby-plugin-lodash`,
     },
-    {
-      resolve: 'gatsby-plugin-mailchimp',
-      options: {
-        endpoint: '', // add your MC list endpoint here
-      },
-    },
+    // {
+    //   resolve: 'gatsby-plugin-mailchimp',
+    //   options: {
+    //     endpoint: '', // add your MC list endpoint here
+    //   },
+    // },
     {
       resolve: `gatsby-source-instagram`,
       //add your instagram username, access_token and id below
