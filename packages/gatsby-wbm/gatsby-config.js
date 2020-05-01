@@ -113,12 +113,12 @@ module.exports = {
     {
       resolve: `gatsby-plugin-lodash`,
     },
-    // {
-    //   resolve: 'gatsby-plugin-mailchimp',
-    //   options: {
-    //     endpoint: '', // add your MC list endpoint here
-    //   },
-    // },
+    {
+      resolve: 'gatsby-plugin-mailchimp',
+      options: {
+        endpoint: 'https://webbrainsmedia.us8.list-manage.com/subscribe/post?u=def510decbb2d052415d85938&amp;id=905ced78f3', // add your MC list endpoint here
+      },
+    },
     {
       resolve: `gatsby-source-instagram`,
       //add your instagram username, access_token and id below
