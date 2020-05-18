@@ -22,17 +22,30 @@ const SignupSchema = Yup.object().shape({
   message: Yup.string().required('Required'),
 })
 
+const encode = (data: any) => {
+  return Object.keys(data)
+    .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+    .join('&')
+}
+
 const Contact: React.SFC<{}> = () => {
   return (
     <Formik
-      netlify
       initialValues={{ firstName: '', email: '', message: '' }}
       onSubmit={(values: MyFormValues, actions: any) => {
-        setTimeout(() => {
-          console.log({ values, actions })
-          alert(JSON.stringify(values, null, 2))
-          actions.setSubmitting(false)
-        }, 700)
+        fetch('/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: encode({ 'form-name': 'contact-form', ...values }),
+        })
+          .then(() => {
+            alert('Successfully Submitted')
+            actions.resetForm()
+          })
+          .catch(() => {
+            alert('Error Submitting Form')
+          })
+          .finally(() => actions.setSubmitting(false))
       }}
       validationSchema={SignupSchema}
       render={({
@@ -44,7 +57,7 @@ const Contact: React.SFC<{}> = () => {
         isSubmitting,
       }: FormikProps<MyFormValues>) => (
         <>
-          <Form>
+          <Form name="contact-form" data-netlify={true}>
             <ContactWrapper>
               <ContactPageTitle>
                 <h2>Contact</h2>
