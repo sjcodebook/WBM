@@ -1,25 +1,25 @@
-import React from 'react';
-import { graphql, Link } from 'gatsby';
-import _ from 'lodash';
-import urljoin from 'url-join';
-import { DiscussionEmbed } from 'disqus-react';
-import Layout from '../components/layout';
-import SEO from '../components/seo';
-import PostCard from '../components/post-card/post-card';
-import PostDetails from '../components/post-details/post-details';
-import Sidebar from '../containers/sidebar';
+import React from 'react'
+import { graphql, Link } from 'gatsby'
+import _ from 'lodash'
+import urljoin from 'url-join'
+import { DiscussionEmbed } from 'disqus-react'
+import Layout from '../components/layout'
+import SEO from '../components/seo'
+import PostCard from '../components/post-card/post-card'
+import PostDetails from '../components/post-details/post-details'
+import Sidebar from '../containers/sidebar'
 import {
   FacebookShareButton,
   TwitterShareButton,
   PinterestShareButton,
   RedditShareButton,
-} from 'react-share';
+} from 'react-share'
 import {
   IoLogoFacebook,
   IoLogoTwitter,
   IoLogoPinterest,
   IoLogoReddit,
-} from 'react-icons/io';
+} from 'react-icons/io'
 import {
   BlogPostDetailsWrapper,
   RelatedPostWrapper,
@@ -31,20 +31,20 @@ import {
   PostTags,
   BlogPostComment,
   BlogDetailsContent,
-} from './templates.style';
+} from './templates.style'
 
 const BlogPostTemplate = (props: any) => {
-  const post = props.data.markdownRemark;
-  const { edges } = props.data.allMarkdownRemark;
-  const title = post.frontmatter.title;
-  const slug = post.fields.slug;
-  const siteUrl = props.data.site.siteMetadata.siteUrl;
-  const shareUrl = urljoin(siteUrl, slug);
+  const post = props.data.markdownRemark
+  const { edges } = props.data.allMarkdownRemark
+  const title = post.frontmatter.title
+  const slug = post.fields.slug
+  const siteUrl = props.data.site.siteMetadata.siteUrl
+  const shareUrl = urljoin(siteUrl, slug)
 
   const disqusConfig = {
-    shortname: process.env.DISQUS_NAME,
+    shortname: 'webbrainsmedia',
     config: { identifier: slug, title },
-  };
+  }
 
   return (
     <Layout>
@@ -122,11 +122,11 @@ const BlogPostTemplate = (props: any) => {
                 '#0984e3',
                 '#badc58',
                 '#c7ecee',
-              ];
+              ]
               const setColor =
                 placeholderColors[
                   Math.floor(Math.random() * placeholderColors.length)
-                ];
+                ]
               return (
                 <RelatedPostItem key={node.fields.slug}>
                   <PostCard
@@ -141,16 +141,16 @@ const BlogPostTemplate = (props: any) => {
                     placeholderBG={setColor}
                   />
                 </RelatedPostItem>
-              );
+              )
             })}
           </RelatedPostItems>
         </RelatedPostWrapper>
       )}
     </Layout>
-  );
-};
+  )
+}
 
-export default BlogPostTemplate;
+export default BlogPostTemplate
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!, $tag: [String!]) {
@@ -210,4 +210,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`
