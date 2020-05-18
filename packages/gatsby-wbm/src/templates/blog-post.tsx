@@ -42,7 +42,7 @@ const BlogPostTemplate = (props: any) => {
   const shareUrl = urljoin(siteUrl, slug)
 
   const disqusConfig = {
-    shortname: 'webbrainsmedia',
+    shortname: process.env.DISQUS_NAME,
     config: { identifier: slug, title },
   }
 
