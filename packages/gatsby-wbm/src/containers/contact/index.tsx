@@ -1,37 +1,38 @@
-import * as React from 'react';
-import { Formik, FormikProps, Form } from 'formik';
-import * as Yup from 'yup';
-import Input from '../../components/input/input';
-import Button from '../../components/button/button';
+import * as React from 'react'
+import { Formik, FormikProps, Form } from 'formik'
+import * as Yup from 'yup'
+import Input from '../../components/input/input'
+import Button from '../../components/button/button'
 import {
   ContactWrapper,
   ContactPageTitle,
   ContactFromWrapper,
   InputGroup,
-} from './style';
+} from './style'
 
 interface MyFormValues {
-  firstName: string;
-  email: string;
-  message: string;
+  firstName: string
+  email: string
+  message: string
 }
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string().required('Required'),
   email: Yup.string().email('Invalid email').required('Required'),
   message: Yup.string().required('Required'),
-});
+})
 
 const Contact: React.SFC<{}> = () => {
   return (
     <Formik
+      netlify
       initialValues={{ firstName: '', email: '', message: '' }}
       onSubmit={(values: MyFormValues, actions: any) => {
         setTimeout(() => {
-          console.log({ values, actions });
-          alert(JSON.stringify(values, null, 2));
-          actions.setSubmitting(false);
-        }, 700);
+          console.log({ values, actions })
+          alert(JSON.stringify(values, null, 2))
+          actions.setSubmitting(false)
+        }, 700)
       }}
       validationSchema={SignupSchema}
       render={({
@@ -104,7 +105,7 @@ const Contact: React.SFC<{}> = () => {
         </>
       )}
     />
-  );
-};
+  )
+}
 
-export default Contact;
+export default Contact
