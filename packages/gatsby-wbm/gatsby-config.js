@@ -1,6 +1,6 @@
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
-});
+})
 
 module.exports = {
   siteMetadata: {
@@ -92,8 +92,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `StoryHub - Personal Blog`,
-        short_name: `StoryHub`,
+        name: `WebBrainsMedia - A Dev Blog`,
+        short_name: `WebBrainsMedia`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
@@ -116,7 +116,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-mailchimp',
       options: {
-        endpoint: 'https://webbrainsmedia.us8.list-manage.com/subscribe/post?u=def510decbb2d052415d85938&amp;id=905ced78f3', // add your MC list endpoint here
+        endpoint:
+          'https://webbrainsmedia.us8.list-manage.com/subscribe/post?u=def510decbb2d052415d85938&amp;id=905ced78f3', // add your MC list endpoint here
       },
     },
     {
@@ -144,4 +145,4 @@ module.exports = {
       },
     },
   ],
-};
+}
