@@ -31,6 +31,10 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
             {'Privacy Policy'}
           </Link>
           ||
+          <Link to={'/disclaimer'} activeClassName="active-link">
+            {'Disclaimer'}
+          </Link>
+          ||
           <Link to={'/terms'} activeClassName="active-link">
             {'Terms Of Use'}
           </Link>
