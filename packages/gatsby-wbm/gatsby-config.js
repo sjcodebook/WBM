@@ -6,8 +6,10 @@ module.exports = {
   siteMetadata: {
     title: `WebBrainsMedia`,
     author: `Sanmati Kumar Jain`,
-    about: `jdjd`,
-    description: `A Gatsby Blog`,
+    about: `WebBrainsMedia is a tech blog created with the sole purpose of
+    explaining complex tech in a simple and concise way thus creating
+    value for budding developers out there.`,
+    description: `Tech blogs on javascript, typescript, python, react, gatsby, next, nodejs, docker, kubernetes, linux, payment gateways, aws, netlify, git, microservices, algorithm questions and much more...`,
     siteUrl: `https://webbrainsmedia.com`,
   },
   plugins: [

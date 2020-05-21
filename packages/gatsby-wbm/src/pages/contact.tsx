@@ -1,21 +1,21 @@
-import React from 'react';
-import Layout from '../components/layout';
-import SEO from '../components/seo';
-import Contact from '../containers/contact';
+import React from 'react'
+import Layout from '../components/layout'
+import SEO from '../components/seo'
+import Contact from '../containers/contact'
 
-type ContactPageProps = {};
+type ContactPageProps = {}
 
 const ContactPage: React.FunctionComponent<ContactPageProps> = () => {
   return (
     <Layout>
       <SEO
         title="Contact"
-        description="StoryHub is a beautiful Gatsby Blog theme designed to showcase your work in style. Perfect for designers, artists, photographers and developers to use for their portfolio website."
+        description="Contact WebBrainsMedia for any suggestions, issues and we will try to implement/resolve them ASAP."
       />
 
       <Contact />
     </Layout>
-  );
-};
+  )
+}
 
-export default ContactPage;
+export default ContactPage
