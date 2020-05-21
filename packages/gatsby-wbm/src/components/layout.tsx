@@ -1,17 +1,18 @@
-import React from 'react';
-import Sticky from 'react-stickynode';
-import { ThemeProvider } from 'styled-components';
-import ScrollToTop from 'react-scroll-up';
-import Navbar from './navbar/navbar';
-import Newsletter from './newsletter/newsletter';
-import Footer from './footer/footer';
-import ScrollUpButton from './scroll-up-button/scroll-up-button';
-import ResetCss from './reset-css';
-import { theme } from '../theme';
+import React from 'react'
+import Sticky from 'react-stickynode'
+import { ThemeProvider } from 'styled-components'
+import ScrollToTop from 'react-scroll-up'
+import Navbar from './navbar/navbar'
+import Newsletter from './newsletter/newsletter'
+import Footer from './footer/footer'
+import ScrollUpButton from './scroll-up-button/scroll-up-button'
+import ResetCss from './reset-css'
+import { theme } from '../theme'
+import { Link } from 'gatsby'
 
 type LayoutProps = {
-  children: React.ReactNode;
-};
+  children: React.ReactNode
+}
 
 const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
   return (
@@ -26,6 +27,10 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
 
         <Newsletter />
         <Footer>
+          <Link to={'/privacy-policy'} activeClassName="active-link">
+            {'Privacy Policy'}
+          </Link>
+          <br />
           Copyright &copy; {new Date().getFullYear()}
           <a href="https://webbrainsmedia.com"> WebBrainsMedia</a>
         </Footer>
@@ -39,7 +44,7 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
         </ScrollToTop>
       </>
     </ThemeProvider>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout
