@@ -30,6 +30,10 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
           <Link to={'/privacy-policy'} activeClassName="active-link">
             {'Privacy Policy'}
           </Link>
+          ||
+          <Link to={'/terms'} activeClassName="active-link">
+            {'Terms Of Use'}
+          </Link>
           <br />
           Copyright &copy; {new Date().getFullYear()}
           <a href="https://webbrainsmedia.com"> WebBrainsMedia</a>
