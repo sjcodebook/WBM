@@ -1,21 +1,21 @@
-import React from 'react';
-import Layout from '../components/layout';
-import SEO from '../components/seo';
-import About from '../containers/about';
+import React from 'react'
+import Layout from '../components/layout'
+import SEO from '../components/seo'
+import About from '../containers/about'
 
-type AboutPageProps = {};
+type AboutPageProps = {}
 
 const AboutPage: React.FunctionComponent<AboutPageProps> = () => {
   return (
     <Layout>
       <SEO
         title="About"
-        description="StoryHub is a beautiful Gatsby Blog theme designed to showcase your work in style. Perfect for designers, artists, photographers and developers to use for their portfolio website."
+        description="About Webbrainsmedia || What is it all about?"
       />
 
       <About />
     </Layout>
-  );
-};
+  )
+}
 
-export default AboutPage;
+export default AboutPage

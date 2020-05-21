@@ -1,20 +1,20 @@
-import * as React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
-import Image from 'gatsby-image';
-import SocialProfile from '../../components/social-profile/social-profile';
+import * as React from 'react'
+import { useStaticQuery, graphql } from 'gatsby'
+import Image from 'gatsby-image'
+import SocialProfile from '../../components/social-profile/social-profile'
 import {
   IoLogoFacebook,
   IoLogoTwitter,
   IoLogoInstagram,
   IoLogoLinkedin,
-} from 'react-icons/io';
+} from 'react-icons/io'
 import {
   AboutWrapper,
   AboutImage,
   AboutPageTitle,
   AboutDetails,
   SocialProfiles,
-} from './style';
+} from './style'
 
 const SocialLinks = [
   {
@@ -37,7 +37,7 @@ const SocialLinks = [
     url: 'https://www.linkedin.com/company/redqinc/',
     tooltip: 'Linked In',
   },
-];
+]
 
 interface AboutProps {}
 
@@ -58,44 +58,37 @@ const About: React.FunctionComponent<AboutProps> = () => {
         }
       }
     }
-  `);
+  `)
 
   return (
     <AboutWrapper>
-      <AboutPageTitle>
-        <h2>About StoryHub</h2>
-        <p>
-          StoryHub is a beautiful Gatsby Blog theme designed to showcase your
-          work in style. Perfect for designers, artists, photographers and
-          developers to use for their portfolio website.
-        </p>
-      </AboutPageTitle>
+      {/* <AboutPageTitle>
+        <h2>About WebBrainsMedia</h2>
+      </AboutPageTitle> */}
 
-      <AboutImage>
+      {/* <AboutImage>
         <Image fluid={Data.avatar.childImageSharp.fluid} alt="author" />
-      </AboutImage>
+      </AboutImage> */}
 
       <AboutDetails>
         <h2>Hey there, what’s up?</h2>
         <p>
-          RedQ Team is a creative agency specializing in building scalable,
-          high-performance web & mobile application. Our main concern is
-          creating more value into the application so that can help our
-          customers to grow their business.
+          WebBrainsMedia is a tech blog created with the sole purpose of
+          explaining complex tech in a simple and concise way thus creating
+          value for budding developers out there.
         </p>
         <p>
-          RedQ Team is a creative agency specializing in building scalable,
-          high-performance web & mobile application. Our main concern is
-          creating more value into the application so that can help our
-          customers to grow their business.
+          Here you will find blogs on the latest tech, tutorials on programming
+          languages, explanations to data structure and algorithm concepts and
+          questions, and much more... So stay tuned!!
         </p>
 
-        <SocialProfiles>
+        {/* <SocialProfiles>
           <SocialProfile items={SocialLinks} />
-        </SocialProfiles>
+        </SocialProfiles> */}
       </AboutDetails>
     </AboutWrapper>
-  );
-};
+  )
+}
 
-export default About;
+export default About
