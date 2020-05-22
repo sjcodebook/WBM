@@ -55,6 +55,7 @@ const BlogPostTemplate = (props: any) => {
       <BlogPostDetailsWrapper>
         <BlogDetailsContent>
           <PostDetails
+            slug={slug}
             title={post.frontmatter.title}
             date={post.frontmatter.date}
             preview={
@@ -63,6 +64,7 @@ const BlogPostTemplate = (props: any) => {
                 : post.frontmatter.cover.childImageSharp.fluid
             }
             description={post.html}
+            hasJs={post.frontmatter.hasJs}
           />
 
           <BlogPostFooter>
@@ -170,6 +172,7 @@ export const pageQuery = graphql`
         title
         date(formatString: "DD MMM, YYYY")
         description
+        hasJs
         tags
         cover {
           publicURL
