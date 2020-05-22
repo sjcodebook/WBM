@@ -2,6 +2,7 @@ import * as React from 'react'
 import Img from 'gatsby-image'
 import { Link } from 'gatsby'
 import _ from 'lodash'
+import * as Jscomp from './hasJs'
 import {
   PostDetailsWrapper,
   PostTitle,
@@ -13,19 +14,23 @@ import {
 } from './post-details.style'
 
 type PostDetailsProps = {
+  slug: string
   title: string
   date?: string
   preview?: any
   description: any
+  hasJs: boolean
   tags?: []
   className?: string
 }
 
 const PostDetails: React.FunctionComponent<PostDetailsProps> = ({
+  slug,
   title,
   date,
   preview,
   description,
+  hasJs,
   tags,
   className,
   ...props
@@ -52,33 +57,41 @@ const PostDetails: React.FunctionComponent<PostDetailsProps> = ({
   const setColor =
     placeholderColors[Math.floor(Math.random() * placeholderColors.length)]
 
-  return (
-    <PostDetailsWrapper {...props} className={addClass.join(' ')}>
-      <PostTitle>{title}</PostTitle>
-      <PostDate>{date}</PostDate>
-      {preview == null ? null : (
-        <PostPreview className="post_preview">
-          <Img fluid={preview} alt={title} backgroundColor={setColor} />
-        </PostPreview>
-      )}
-
-      <PostDescriptionWrapper className="post_des_wrapper">
-        <PostDescription
-          dangerouslySetInnerHTML={{ __html: description }}
-          className="post_des"
-        />
-        {tags == null ? null : (
-          <PostTags>
-            {tags.map((tag, index) => (
-              <Link key={index} to={`/tags/${_.kebabCase(tag)}/`}>
-                {`#${tag}`}
-              </Link>
-            ))}
-          </PostTags>
+  if (!hasJs) {
+    return (
+      <PostDetailsWrapper {...props} className={addClass.join(' ')}>
+        <PostTitle>{title}</PostTitle>
+        <PostDate>{date}</PostDate>
+        {preview == null ? null : (
+          <PostPreview className="post_preview">
+            <Img fluid={preview} alt={title} backgroundColor={setColor} />
+          </PostPreview>
         )}
-      </PostDescriptionWrapper>
-    </PostDetailsWrapper>
-  )
+
+        <PostDescriptionWrapper className="post_des_wrapper">
+          <PostDescription
+            dangerouslySetInnerHTML={{ __html: description }}
+            className="post_des"
+          />
+          {tags == null ? null : (
+            <PostTags>
+              {tags.map((tag, index) => (
+                <Link key={index} to={`/tags/${_.kebabCase(tag)}/`}>
+                  {`#${tag}`}
+                </Link>
+              ))}
+            </PostTags>
+          )}
+        </PostDescriptionWrapper>
+      </PostDetailsWrapper>
+    )
+  } else {
+    return Jscomp[slug]()
+  }
+}
+
+PostDetails.defaultProps = {
+  hasJs: false,
 }
 
 export default PostDetails

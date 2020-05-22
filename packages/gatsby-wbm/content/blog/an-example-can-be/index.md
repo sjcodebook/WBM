@@ -2,7 +2,10 @@
 title: An example can be illustrative
 date: '2019-03-06T23:46:37.121Z'
 cover: './preview.jpg'
+description: An Essay on Typography by Eric Gill takes the reader back to the year 1930. The year when a conflict between two worlds came to its term. The machines of the industrial world finally took over the handicrafts.
 tags: ['markdown', 'test', 'tips']
+slug: 'first'
+hasJs: false
 ---
 
 Given the discourse around this issue, it can be easy to either overestimate the scope of this problem, or discount solving it as irrelevant to the libraries’ mission. Recent studies have shown that the scale and impact of fake news is less significant than much of the initial reporting would suggest. While many people get their news from social media, they do not always consider it their primary source of information (Illing, 2017). Moreover, the basic trends that drive fake news include an increasingly partisan media culture that predates social media (Mittell, 2016). Perhaps most importantly, there is evidence to suggest that when people are presented with “inoculating” messages beforehand, for example information about the scientific consensus or information about the general strategies used in misinformation campaigns, it made a significant positive difference in how they interpreted subsequent information even when it taps into their preexisting identities (Cook et al., 2017; van der Linden et al., 2017). That is to say, the rise of fake news, while a serious problem, does not signal a general inability for people to identify and process facts or that there are no strategies that can effectively counteract these tendencies. Rather it signals something important about how emotions and identities, particularly when exploited by technology platforms, can influence our understanding of new information. Moreover, outside of those emotionally driven, identity-based incentives, there is less of a reason for people to use technology to generate purposefully misleading information.
