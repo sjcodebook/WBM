@@ -1,7 +1,7 @@
-import * as React from 'react';
-import Img from 'gatsby-image';
-import { Link } from 'gatsby';
-import _ from 'lodash';
+import * as React from 'react'
+import Img from 'gatsby-image'
+import { Link } from 'gatsby'
+import _ from 'lodash'
 import {
   PostDetailsWrapper,
   PostTitle,
@@ -10,17 +10,16 @@ import {
   PostDescriptionWrapper,
   PostDescription,
   PostTags,
-} from './post-details.style';
+} from './post-details.style'
 
 type PostDetailsProps = {
-  title: string;
-  date?: string;
-  preview?: any;
-  description: any;
-  tags?: [];
-  className?: string;
-  imagePosition?: 'left' | 'top';
-};
+  title: string
+  date?: string
+  preview?: any
+  description: any
+  tags?: []
+  className?: string
+}
 
 const PostDetails: React.FunctionComponent<PostDetailsProps> = ({
   title,
@@ -29,17 +28,12 @@ const PostDetails: React.FunctionComponent<PostDetailsProps> = ({
   description,
   tags,
   className,
-  imagePosition,
   ...props
 }) => {
-  const addClass: string[] = ['post_details'];
-
-  if (imagePosition == 'left') {
-    addClass.push('image_left');
-  }
+  const addClass: string[] = ['post_details']
 
   if (className) {
-    addClass.push(className);
+    addClass.push(className)
   }
 
   // Random Placeholder Color
@@ -54,53 +48,21 @@ const PostDetails: React.FunctionComponent<PostDetailsProps> = ({
     '#0984e3',
     '#badc58',
     '#c7ecee',
-  ];
+  ]
   const setColor =
-    placeholderColors[Math.floor(Math.random() * placeholderColors.length)];
+    placeholderColors[Math.floor(Math.random() * placeholderColors.length)]
 
   return (
     <PostDetailsWrapper {...props} className={addClass.join(' ')}>
-      {imagePosition == 'left' ? (
-        <>
-          {preview == null ? null : (
-            <PostPreview className="post_preview">
-              <Img fluid={preview} alt={title} backgroundColor={setColor} />
-            </PostPreview>
-          )}
-        </>
-      ) : (
-        ''
+      <PostTitle>{title}</PostTitle>
+      <PostDate>{date}</PostDate>
+      {preview == null ? null : (
+        <PostPreview className="post_preview">
+          <Img fluid={preview} alt={title} backgroundColor={setColor} />
+        </PostPreview>
       )}
 
-      {imagePosition == 'top' ? (
-        <>
-          <PostTitle>{title}</PostTitle>
-          <PostDate>{date}</PostDate>
-        </>
-      ) : (
-        ''
-      )}
-
-      {imagePosition == 'top' ? (
-        <>
-          {preview == null ? null : (
-            <PostPreview className="post_preview">
-              <Img fluid={preview} alt={title} backgroundColor={setColor} />
-            </PostPreview>
-          )}
-        </>
-      ) : (
-        ''
-      )}
       <PostDescriptionWrapper className="post_des_wrapper">
-        {imagePosition == 'left' ? (
-          <>
-            <PostTitle>{title}</PostTitle>
-            <PostDate>{date}</PostDate>
-          </>
-        ) : (
-          ''
-        )}
         <PostDescription
           dangerouslySetInnerHTML={{ __html: description }}
           className="post_des"
@@ -116,11 +78,7 @@ const PostDetails: React.FunctionComponent<PostDetailsProps> = ({
         )}
       </PostDescriptionWrapper>
     </PostDetailsWrapper>
-  );
-};
+  )
+}
 
-PostDetails.defaultProps = {
-  imagePosition: 'top',
-};
-
-export default PostDetails;
+export default PostDetails
