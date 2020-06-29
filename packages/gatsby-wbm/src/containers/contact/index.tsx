@@ -1,32 +1,32 @@
-import * as React from 'react'
-import { Formik, FormikProps, Form } from 'formik'
-import * as Yup from 'yup'
-import Input from '../../components/input/input'
-import Button from '../../components/button/button'
+import * as React from 'react';
+import { Formik, FormikProps, Form } from 'formik';
+import * as Yup from 'yup';
+import Input from '../../components/input/input';
+import Button from '../../components/button/button';
 import {
   ContactWrapper,
   ContactPageTitle,
   ContactFromWrapper,
   InputGroup,
-} from './style'
+} from './style';
 
 interface MyFormValues {
-  firstName: string
-  email: string
-  message: string
+  firstName: string;
+  email: string;
+  message: string;
 }
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string().required('Required'),
   email: Yup.string().email('Invalid email').required('Required'),
   message: Yup.string().required('Required'),
-})
+});
 
 const encode = (data: any) => {
   return Object.keys(data)
     .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-    .join('&')
-}
+    .join('&');
+};
 
 const Contact: React.SFC<{}> = () => {
   return (
@@ -39,13 +39,13 @@ const Contact: React.SFC<{}> = () => {
           body: encode({ 'form-name': 'contact-form', ...values }),
         })
           .then(() => {
-            alert('Successfully Submitted')
-            actions.resetForm()
+            alert('Successfully Submitted');
+            actions.resetForm();
           })
           .catch(() => {
-            alert('Error Submitting Form')
+            alert('Error Submitting Form');
           })
-          .finally(() => actions.setSubmitting(false))
+          .finally(() => actions.setSubmitting(false));
       }}
       validationSchema={SignupSchema}
       render={({
@@ -62,7 +62,7 @@ const Contact: React.SFC<{}> = () => {
               <ContactPageTitle>
                 <h2>Contact</h2>
                 <p>
-                  Contact WebBrainsMedia for any suggestions, issues and we will
+                  Contact WebBrainsMedia for any suggestions/issues and we will
                   try to implement/resolve them ASAP.
                 </p>
               </ContactPageTitle>
@@ -116,7 +116,7 @@ const Contact: React.SFC<{}> = () => {
         </>
       )}
     />
-  )
-}
+  );
+};
 
-export default Contact
+export default Contact;

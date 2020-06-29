@@ -1,10 +1,10 @@
 ---
-title: An example can be illustrative
-date: '2019-03-06T23:46:37.121Z'
-cover: './preview.jpg'
+title: 'React Hooks Explained: useState( )'
+date: '2020-06-08T23:46:37.121Z'
+cover: './cover.png'
 description: An Essay on Typography by Eric Gill takes the reader back to the year 1930. The year when a conflict between two worlds came to its term. The machines of the industrial world finally took over the handicrafts.
-tags: ['markdown', 'test', 'tips']
-slug: 'first'
+tags: ['reactjs', 'reactHooks', 'featured']
+slug: 'react-hooks-explained-useState'
 hasJs: false
 ---
 

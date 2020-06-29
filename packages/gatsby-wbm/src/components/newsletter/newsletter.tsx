@@ -43,10 +43,10 @@ const Newsletter: React.FunctionComponent<NewsletterProps> = ({ ...props }) => {
     <NewsletterWrapper {...props}>
       <NewsletterInnerWrapper>
         <NewsletterTitle>
-          Get The Best Of All Hands Delivered To Your Inbox
+          Subscribe To Get Instant Updates On Release Of New Blogs And Courses
         </NewsletterTitle>
         <NewsletterDescription>
-          Subscribe to our newsletter and stay updated.
+          We Respect Your Privacy. Your Email Will Never Be Shared.
         </NewsletterDescription>
 
         <NewsletterInputWrapper onSubmit={handleSubmit}>
@@ -57,7 +57,7 @@ const Newsletter: React.FunctionComponent<NewsletterProps> = ({ ...props }) => {
               <Input
                 type="email"
                 name="email"
-                placeholder="Write your email here"
+                placeholder="abc@xyz.com"
                 onChange={handleChange}
                 value={email}
                 required={true}
