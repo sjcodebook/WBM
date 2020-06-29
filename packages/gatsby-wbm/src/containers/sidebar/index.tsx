@@ -48,28 +48,11 @@ const Sidebar: React.FunctionComponent<SidebarProps> = () => {
           fieldValue
         }
       }
-      allInstaNode(limit: 4) {
-        edges {
-          node {
-            id
-            likes
-            comments
-            localFile {
-              childImageSharp {
-                fluid(maxWidth: 100, maxHeight: 100, quality: 100) {
-                  ...GatsbyImageSharpFluid_noBase64
-                }
-              }
-            }
-          }
-        }
-      }
     }
   `);
 
   const Posts = Data.allMarkdownRemark.edges;
   const Tags = Data.allMarkdownRemark.group;
-  const InstagramPhotos = Data.allInstaNode.edges;
 
   return (
     <SidebarWrapper>
