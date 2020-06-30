@@ -13,6 +13,7 @@ module.exports = {
     siteUrl: `https://webbrainsmedia.com`,
   },
   plugins: [
+    `gatsby-remark-images`,
     {
       resolve: `gatsby-plugin-styled-components`,
       options: {
@@ -34,9 +35,10 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: `gatsby-plugin-mdx`,
       options: {
-        plugins: [
+        extensions: [`.md`, `.mdx`],
+        gatsbyRemarkPlugins: [
           {
             resolve: `gatsby-remark-images`,
             options: {

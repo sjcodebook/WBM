@@ -1,8 +1,9 @@
-import * as React from 'react'
-import Img from 'gatsby-image'
-import { Link } from 'gatsby'
-import _ from 'lodash'
-import * as Jscomp from './hasJs'
+import * as React from 'react';
+import Img from 'gatsby-image';
+import { Link } from 'gatsby';
+import _ from 'lodash';
+import * as Jscomp from './hasJs';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
 import {
   PostDetailsWrapper,
   PostTitle,
@@ -11,18 +12,18 @@ import {
   PostDescriptionWrapper,
   PostDescription,
   PostTags,
-} from './post-details.style'
+} from './post-details.style';
 
 type PostDetailsProps = {
-  slug: string
-  title: string
-  date?: string
-  preview?: any
-  description: any
-  hasJs: boolean
-  tags?: []
-  className?: string
-}
+  slug: string;
+  title: string;
+  date?: string;
+  preview?: any;
+  description: any;
+  hasJs: boolean;
+  tags?: [];
+  className?: string;
+};
 
 const PostDetails: React.FunctionComponent<PostDetailsProps> = ({
   slug,
@@ -35,10 +36,10 @@ const PostDetails: React.FunctionComponent<PostDetailsProps> = ({
   className,
   ...props
 }) => {
-  const addClass: string[] = ['post_details']
+  const addClass: string[] = ['post_details'];
 
   if (className) {
-    addClass.push(className)
+    addClass.push(className);
   }
 
   // Random Placeholder Color
@@ -53,9 +54,9 @@ const PostDetails: React.FunctionComponent<PostDetailsProps> = ({
     '#0984e3',
     '#badc58',
     '#c7ecee',
-  ]
+  ];
   const setColor =
-    placeholderColors[Math.floor(Math.random() * placeholderColors.length)]
+    placeholderColors[Math.floor(Math.random() * placeholderColors.length)];
 
   if (!hasJs) {
     return (
@@ -69,10 +70,9 @@ const PostDetails: React.FunctionComponent<PostDetailsProps> = ({
         )}
 
         <PostDescriptionWrapper className="post_des_wrapper">
-          <PostDescription
-            dangerouslySetInnerHTML={{ __html: description }}
-            className="post_des"
-          />
+          <PostDescription className="post_des">
+            <MDXRenderer>{description}</MDXRenderer>
+          </PostDescription>
           {tags == null ? null : (
             <PostTags>
               {tags.map((tag, index) => (
@@ -84,14 +84,14 @@ const PostDetails: React.FunctionComponent<PostDetailsProps> = ({
           )}
         </PostDescriptionWrapper>
       </PostDetailsWrapper>
-    )
+    );
   } else {
-    return Jscomp[slug]()
+    return Jscomp[slug]();
   }
-}
+};
 
 PostDetails.defaultProps = {
   hasJs: false,
-}
+};
 
-export default PostDetails
+export default PostDetails;

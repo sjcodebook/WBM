@@ -8,7 +8,7 @@ type BannerProps = {};
 const Banner: React.FunctionComponent<BannerProps> = () => {
   const Data = useStaticQuery(graphql`
     query {
-      allMarkdownRemark(
+      allMdx(
         sort: { fields: [frontmatter___date], order: DESC }
         limit: 5
         filter: { frontmatter: { tags: { eq: "featured" } } }
@@ -39,7 +39,7 @@ const Banner: React.FunctionComponent<BannerProps> = () => {
     }
   `);
 
-  const Posts = Data.allMarkdownRemark.edges;
+  const Posts = Data.allMdx.edges;
 
   return (
     <BannerWrapper>
