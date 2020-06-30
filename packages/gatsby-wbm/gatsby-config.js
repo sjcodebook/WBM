@@ -133,6 +133,9 @@ module.exports = {
           {
             resolve: `gatsby-remark-smartypants`,
           },
+          {
+            resolve: `gatsby-plugin-feed`,
+          },
         ],
       },
     },
@@ -147,9 +150,6 @@ module.exports = {
       options: {
         //trackingId: `ADD YOUR TRACKING ID HERE`,
       },
-    },
-    {
-      resolve: `gatsby-plugin-feed`,
     },
     {
       resolve: `gatsby-plugin-manifest`,
