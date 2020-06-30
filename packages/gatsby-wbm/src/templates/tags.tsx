@@ -1,13 +1,13 @@
-import React from 'react'
-import { graphql } from 'gatsby'
-import Layout from '../components/layout'
-import PostCard from '../components/post-card/post-card'
-import SEO from '../components/seo'
-import { TagPostsWrapper, TagPageHeading, TagName } from './templates.style'
+import React from 'react';
+import { graphql } from 'gatsby';
+import Layout from '../components/layout';
+import PostCard from '../components/post-card/post-card';
+import SEO from '../components/seo';
+import { TagPostsWrapper, TagPageHeading, TagName } from './templates.style';
 
 const Tags = ({ pageContext, data }: any) => {
-  const { tag } = pageContext
-  const { edges, totalCount } = data.allMarkdownRemark
+  const { tag } = pageContext;
+  const { edges, totalCount } = data.allMdx;
 
   return (
     <Layout>
@@ -30,14 +30,14 @@ const Tags = ({ pageContext, data }: any) => {
         ))}
       </TagPostsWrapper>
     </Layout>
-  )
-}
+  );
+};
 
-export default Tags
+export default Tags;
 
 export const pageQuery = graphql`
   query($tag: String) {
-    allMarkdownRemark(
+    allMdx(
       limit: 2000
       sort: { fields: [frontmatter___date], order: DESC }
       filter: { frontmatter: { tags: { in: [$tag] } } }
@@ -59,4 +59,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;

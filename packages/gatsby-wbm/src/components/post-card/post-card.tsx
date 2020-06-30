@@ -45,6 +45,8 @@ const PostCard: React.FunctionComponent<PostCardProps> = ({
     addAllClasses.push(className);
   }
 
+  url = `/${url}`;
+
   return (
     <PostCardWrapper className={addAllClasses.join(' ')} {...props}>
       {image == null ? null : (

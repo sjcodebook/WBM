@@ -9,10 +9,7 @@ type PostsProps = {};
 const Posts: React.FunctionComponent<PostsProps> = () => {
   const Data = useStaticQuery(graphql`
     query {
-      allMarkdownRemark(
-        sort: { fields: [frontmatter___date], order: DESC }
-        limit: 6
-      ) {
+      allMdx(sort: { fields: [frontmatter___date], order: DESC }, limit: 6) {
         totalCount
         edges {
           node {
@@ -39,7 +36,7 @@ const Posts: React.FunctionComponent<PostsProps> = () => {
     }
   `);
 
-  const Posts = Data.allMarkdownRemark.edges;
+  const Posts = Data.allMdx.edges;
 
   return (
     <BlogPostsWrapper>

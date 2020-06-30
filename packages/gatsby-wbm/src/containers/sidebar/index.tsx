@@ -18,10 +18,7 @@ type SidebarProps = {};
 const Sidebar: React.FunctionComponent<SidebarProps> = () => {
   const Data = useStaticQuery(graphql`
     query {
-      allMarkdownRemark(
-        sort: { fields: [frontmatter___date], order: DESC }
-        limit: 5
-      ) {
+      allMdx(sort: { fields: [frontmatter___date], order: DESC }, limit: 5) {
         edges {
           node {
             excerpt(pruneLength: 300)
@@ -51,8 +48,8 @@ const Sidebar: React.FunctionComponent<SidebarProps> = () => {
     }
   `);
 
-  const Posts = Data.allMarkdownRemark.edges;
-  const Tags = Data.allMarkdownRemark.group;
+  const Posts = Data.allMdx.edges;
+  const Tags = Data.allMdx.group;
 
   return (
     <SidebarWrapper>

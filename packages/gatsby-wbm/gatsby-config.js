@@ -13,6 +13,7 @@ module.exports = {
     siteUrl: `https://webbrainsmedia.com`,
   },
   plugins: [
+    `gatsby-remark-images`,
     {
       resolve: `gatsby-plugin-styled-components`,
       options: {
@@ -34,9 +35,10 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: `gatsby-plugin-mdx`,
       options: {
-        plugins: [
+        extensions: [`.md`, `.mdx`],
+        gatsbyRemarkPlugins: [
           {
             resolve: `gatsby-remark-images`,
             options: {
@@ -131,6 +133,9 @@ module.exports = {
           {
             resolve: `gatsby-remark-smartypants`,
           },
+          {
+            resolve: `gatsby-plugin-feed`,
+          },
         ],
       },
     },
@@ -145,9 +150,6 @@ module.exports = {
       options: {
         //trackingId: `ADD YOUR TRACKING ID HERE`,
       },
-    },
-    {
-      resolve: `gatsby-plugin-feed`,
     },
     {
       resolve: `gatsby-plugin-manifest`,

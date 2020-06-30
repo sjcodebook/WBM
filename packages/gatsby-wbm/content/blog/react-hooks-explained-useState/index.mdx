@@ -8,6 +8,15 @@ slug: 'react-hooks-explained-useState'
 hasJs: false
 ---
 
+import Button from '@material-ui/core/Button';
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import EditIcon from '@material-ui/icons/Edit';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import NavigationIcon from '@material-ui/icons/Navigation';
+
 ```javascript{1-2,22}{numberLines: 5}
 // In your gatsby-config.js
 // Let's make this line very long so that our container has to scroll its overflow…
@@ -37,6 +46,23 @@ plugins: [
 ];
 ```
 
+<Button variant="contained">Default</Button>
+
+<Button variant="contained" color="primary">
+  Primary
+</Button>
+
+<Fab color="primary" aria-label="add">
+  <AddIcon />
+</Fab>
+
+<Fab color="secondary" aria-label="edit">
+  <EditIcon />
+</Fab>
+<Fab disabled aria-label="like">
+  <FavoriteIcon />
+</Fab>
+
 ```jsx{6,7,22}{numberLines: 1}
 class FlavorForm extends React.Component { // highlight-line
   constructor(props) {
@@ -45,38 +71,38 @@ class FlavorForm extends React.Component { // highlight-line
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
 
-  handleChange(event) {
-    // highlight-next-line
-    this.setState({value: event.target.value});
-  }
-
-  // highlight-start
-  handleSubmit(event) {
-    alert('Your favorite flavor is: ' + this.state.value);
-    event.preventDefault();
-  }
-  // highlight-end
-
-  render() {
-    return (
-      { /* highlight-range{1,4-9,12} */ }
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Pick your favorite flavor:
-          <select value={this.state.value} onChange={this.handleChange}>
-            <option value="grapefruit">Grapefruit</option>
-            <option value="lime">Lime</option>
-            <option value="coconut">Coconut</option>
-            <option value="mango">Mango</option>
-          </select>
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
-    );
-  }
 }
-```
 
-I can highlight `css±.some-class { background-color: red }` with CSS syntax.
+handleChange(event) {
+// highlight-next-line
+this.setState({value: event.target.value});
+}
+
+// highlight-start
+handleSubmit(event) {
+alert('Your favorite flavor is: ' + this.state.value);
+event.preventDefault();
+}
+// highlight-end
+
+render() {
+return (
+{ /_ highlight-range{1,4-9,12} _/ }
+<form onSubmit={this.handleSubmit}>
+<label>
+Pick your favorite flavor:
+<select value={this.state.value} onChange={this.handleChange}>
+<option value="grapefruit">Grapefruit</option>
+<option value="lime">Lime</option>
+<option value="coconut">Coconut</option>
+<option value="mango">Mango</option>
+</select>
+</label>
+<input type="submit" value="Submit" />
+</form>
+);
+}
+}
+
+```

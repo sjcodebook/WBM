@@ -31,6 +31,7 @@ const FeaturedPost: React.FunctionComponent<FeaturedPostProps> = ({
   placeholderBG,
   ...props
 }) => {
+  url = `/${url}`;
   // Add all classs to an array
   const addAllClasses = ['featured_post'];
 
