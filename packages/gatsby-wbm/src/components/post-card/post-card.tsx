@@ -45,13 +45,13 @@ const PostCard: React.FunctionComponent<PostCardProps> = ({
     addAllClasses.push(className);
   }
 
-  const finalu = '/' + url;
+  url = `/${url}`;
 
   return (
     <PostCardWrapper className={addAllClasses.join(' ')} {...props}>
       {image == null ? null : (
         <PostPreview className="post_preview">
-          <Link to={finalu}>
+          <Link to={url}>
             {imageType === 'fluid' ? (
               <Img
                 fluid={image}

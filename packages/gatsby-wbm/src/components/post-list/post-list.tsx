@@ -42,6 +42,8 @@ const PostList: React.FunctionComponent<PostListProps> = ({
     addAllClasses.push(className);
   }
 
+  url = `/${url}`;
+
   return (
     <PostListWrapper className={addAllClasses.join(' ')} {...props}>
       <Link to={url}>
