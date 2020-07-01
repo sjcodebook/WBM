@@ -177,6 +177,7 @@ export const PostDescription = styled.div`
   }
 
   blockquote {
+    background-color: #f2f2f2;
     font-family: 'Poppins', sans-serif;
     font-size: 21px;
     font-weight: 500;
@@ -199,21 +200,21 @@ export const PostDescription = styled.div`
       background: #292929;
     }
     &:before {
-      margin-bottom: 60px;
+      margin-bottom: 10px;
       @media (max-width: 1200px) {
-        margin-bottom: 50px;
+        margin-bottom: 10px;
       }
       @media (max-width: 575px) {
-        margin-bottom: 40px;
+        margin-bottom: 10px;
       }
     }
     &:after {
-      margin-top: 60px;
+      margin-top: 10px;
       @media (max-width: 1200px) {
-        margin-top: 50px;
+        margin-top: 10px;
       }
       @media (max-width: 575px) {
-        margin-top: 40px;
+        margin-top: 10px;
       }
     }
 

@@ -1,0 +1,297 @@
+---
+title: 'Migrate From Remark To MDX In Gatsby Using These Simple Steps'
+date: '2020-07-02T23:46:37.121Z'
+cover: './cover.png'
+description: Use These Simple Steps To Migrate From Remark To MDX In Gatsby In Under 5 Minutes.
+tags: ['gatsby', 'gatsby-plugins', 'featured']
+slug: 'remark-to-mdx-in-gatsby'
+hasJs: false
+---
+
+# MDX VS Remark
+
+Mdx and remark are both markdown compilers i.e. they convert markdown to HTML. So, that it can be rendered on the browser. We can also write HTML in our `.md` file, as the final result is HTML the compiler will process it as HTML.
+
+Coming to Remark, It gives us the advantage of extending its functionalities using plugins. Mdx is also very similar to remark and icing on the cake is it supports all remark plugins. But what makes it so popular is the ability to process JSX in `.md` files. Basically, it converts the markdown files into React components making it eligible for importing and rendering other components.
+
+This MDX’s ability becomes very useful for things like data-visualization in your blog. MDX makes blogging super fun and easy. Now lets see how we can convert an existing gatsby blog to use MDX in place of Remark.
+
+# Steps To Migrate From Remark To MDX:
+
+### 1) Installing MDX plugin
+
+We first need to install the `gatsby-plugin-mdx` plugin with its dependencies (`@mdx-js/mdx` and `@mdx-js/react`) .
+
+```shell{promptUser: wbm}{promptHost: localhost}
+npm install gatsby-plugin-mdx @mdx-js/mdx @mdx-js/react
+```
+
+<br />
+Also remove the `gatsby-transformer-remark` plugin.
+
+```shell{promptUser: wbm}{promptHost: localhost}
+npm remove gatsby-transformer-remark
+```
+
+<br />
+
+### 2) Replacing Remark Plugin With MDX
+
+Go to your `gatsby-config.js` file, Replace plugin `gatsby-transformer-remark` with `gatsby-plugin-mdx`.
+
+```diff
+--------------------
+||gatsby-config.js||
+--------------------
+- resolve: `gatsby-transformer-remark`
++ resolve: `gatsby-plugin-mdx`
+options: {
+```
+
+<br />
+
+Most of the sub-plugins of Remark works perfectly with MDX. We just need to change the `plugins` option to `gatsbyRemarkPlugins` to let MDX know that these are Remark plugins.
+
+```diff
+--------------------
+||gatsby-config.js||
+--------------------
+resolve: `gatsby-plugin-mdx`
+options: {
+- plugins: [
++ gatsbyRemarkPlugins: [
+```
+
+<br />
+
+_**Note:** You need to add `gatsby-remark-images` plugin as both a sub-plugin of
+`gatsby-plugin-mdx` and a string entry in the plugins array._
+
+```javascript{6, 26-32}
+--------------------
+||gatsby-config.js||
+--------------------
+module.exports = {
+  plugins: [
+    `gatsby-remark-images`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/blog`,
+        name: `blog`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/assets`,
+        name: `assets`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        extensions: [`.md`, `.mdx`],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 590,
+              linkImagesToOriginal: true,
+            },
+          },
+          {
+            resolve: `gatsby-remark-copy-linked-files`,
+          },
+          {
+            resolve: `gatsby-remark-smartypants`,
+          },
+          {
+            resolve: `gatsby-plugin-feed`,
+          },
+        ],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-sharp`,
+    },
+```
+
+<br />
+
+### 3) Change File Extensions
+
+Change your markdown files extension from `.md` to `.mdx`. This will allow MDX to recognize and process them with specified configurations.
+
+If you don't want to change the files extention might be because of large number of files in your project. In this case you can configure MDX plugin to accept both `.md` and `.mdx` files by adding the `extensions` option in `gatsby-plugin-mdx` like this.
+
+```javascript{7}
+--------------------
+||gatsby-config.js||
+--------------------
+{
+    resolve:  `gatsby-plugin-mdx`,
+    options:  {
+        extensions:  [`.md`,  `.mdx`],
+    },
+},
+```
+
+> <u>Tip</u>: If you use Vs-code as your code editor. Use this <a
+>   target="_blank"
+>   href="https://marketplace.visualstudio.com/items?itemName=silvenon.mdx"
+> >
+>   MDX extention
+> </a> for syntax highlighting and bracket matching in MDX files.
+
+### 4) Changes In gatsby-node.js
+
+In the `createPages` API, Replace `allMarkdownRemark` with `allMdx`.
+
+```diff
+------------------
+||gatsby-node.js||
+------------------
+exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions;
+
+  const blogPost = path.resolve(`./src/templates/blog-post.tsx`);
+  const blogList = path.resolve(`./src/templates/blog-list.tsx`);
+  const tagTemplate = path.resolve(`./src/templates/tags.tsx`);
+
+  return graphql(
+    `
+      {
+-       allMarkdownRemark(
++       allMdx(
+          sort: { fields: [frontmatter___date], order: DESC }
+          limit: 1000
+        ) {
+          edges {
+```
+
+<br />
+
+Also, In the `onCreateNode` API. Where it compares the node type to create slugs, there replace `MarkdownRemark` to `Mdx`.
+
+```diff
+------------------
+||gatsby-node.js||
+------------------
+exports.onCreateNode = ({ node, actions, getNode }) => {
+  const { createNodeField } = actions;
+
+-  if (node.internal.type === `MarkdownRemark`) {
++  if (node.internal.type === `Mdx`) {
+    const value = createFilePath({ node, getNode });
+    if (typeof node.frontmatter.slug !== 'undefined') {
+      createNodeField({
+        node,
+        name: 'slug',
+        value: node.frontmatter.slug,
+      });
+    } else {
+```
+
+<br />
+
+### 5) Other Replacements
+
+In your GraphQL queries, wherever you use `allMarkdownRemark` change it to `allMdx` and `markdownRemark` to `mdx`. Also in the `mdx` feild in query, change `html` to `body`.
+
+```diff
+-------------------------------
+||src/templates/blog-post.tsx||
+-------------------------------
+export const pageQuery = graphql`
+  query BlogPostBySlug($slug: String!, $tag: [String!]) {
+    site {
+      siteMetadata {
+        siteUrl
+      }
+    }
+-    markdownRemark(fields: { slug: { eq: $slug } }) {
++    mdx(fields: { slug: { eq: $slug } }) {
+      id
+      excerpt(pruneLength: 160)
+-      html
++      body
+      fields {
+        slug
+      }
+      frontmatter {
+        title
+        date(formatString: "DD MMM, YYYY")
+        description
+        hasJs
+        tags
+        cover {
+          publicURL
+          childImageSharp {
+            fluid(maxWidth: 1170, quality: 100) {
+              ...GatsbyImageSharpFluid_noBase64
+            }
+          }
+        }
+      }
+    }
+-    allMarkdownRemark(
++    allMdx(
+      limit: 3
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: {
+        frontmatter: { tags: { in: $tag } }
+        fields: { slug: { ne: $slug } }
+      }
+    ) {
+      edges {
+```
+
+<br />
+
+_**Note:** There is a chance that you receive an error at build time by a plugin which is quering for `allMarkdownRemark`. I received this error from `gatsby-plugin-feed` plugin to resolve this i moved this inside `gatsbyRemarkPlugins` option in `gatsby-plugin-mdx` from the main plugins array._
+
+Now, In your post-template file import `MDXRenderer` component from `gatsby-plugin-mdx`.
+
+```jsx{5}
+------------------------------------------------
+||src/components/post-details/post-details.tsx||
+------------------------------------------------
+import _ from 'lodash';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
+import { Link } from 'gatsby';
+```
+
+<br />
+
+Finally, Replace `dangerouslySetInnerHTML` to a `MDXRenderer` component:
+
+```diff
+------------------------------------------------
+||src/components/post-details/post-details.tsx||
+------------------------------------------------
+  <PostDescriptionWrapper className="post_des_wrapper">
+-   <PostDescription
+-     dangerouslySetInnerHTML={{ __html: description }}
+-     className="post_des"
+-   />
++   <PostDescription className="post_des">
++     <MDXRenderer>{description}</MDXRenderer>
++   </PostDescription>
+    {tags == null ? null : (
+      <PostTags>
+        {tags.map((tag, index) => (
+          <Link key={index} to={`/tags/${_.kebabCase(tag)}/`}>
+            {`#${tag}`}
+          </Link>
+        ))}
+      </PostTags>
+    )}
+  </PostDescriptionWrapper>
+```
+
+<br />
+
+# Conclusion
+
+Now you can use custom React components or third-party UI elements in your markdown files. Remember that MDX uses JSX in place of HTML. So, make sure that HTML in you markdown file is valid JSX. for example, if you have used `class` attribute in HTML component, change it to `className`. So, that it doesn't create a conflict when processed by MDX.

@@ -86,7 +86,7 @@ const ResetCSS = createGlobalStyle`
   }
 
   :not(pre) > code[class*="language-"], pre[class*="language-"] {
-    background: #f5f5f5;
+    background: #444343;
   }
 
   pre[class*="language-"] {
@@ -142,7 +142,7 @@ const ResetCSS = createGlobalStyle`
   }
 
   .gatsby-highlight-code-line {
-    background-color: #121212;
+    background-color: #211b30;
     display: block;
     margin-right: -1em;
     margin-left: -1em;
@@ -186,7 +186,7 @@ const ResetCSS = createGlobalStyle`
 }
 
 .command-line-prompt > span:before {
-  color: #999;
+  color: green;
   content: " ";
   display: block;
   padding-right: 0.8em;
