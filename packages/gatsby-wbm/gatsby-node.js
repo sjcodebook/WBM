@@ -44,7 +44,7 @@ exports.createPages = ({ graphql, actions }) => {
       const next = index === 0 ? null : posts[index - 1].node;
 
       createPage({
-        path: post.node.fields.slug,
+        path: '/blogs/' + post.node.fields.slug,
         component: blogPost,
         context: {
           slug: post.node.fields.slug,
@@ -61,7 +61,7 @@ exports.createPages = ({ graphql, actions }) => {
 
     Array.from({ length: numPages }).forEach((_, i) => {
       createPage({
-        path: i === 0 ? `/page/1` : `/page/${i + 1}`,
+        path: i === 0 ? `/blogs/1` : `/blogs/${i + 1}`,
         component: blogList,
         context: {
           limit: postsPerPage,

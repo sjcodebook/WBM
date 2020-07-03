@@ -42,7 +42,7 @@ const PostList: React.FunctionComponent<PostListProps> = ({
     addAllClasses.push(className);
   }
 
-  url = `/${url}`;
+  url = `/blogs/${url}`;
 
   return (
     <PostListWrapper className={addAllClasses.join(' ')} {...props}>

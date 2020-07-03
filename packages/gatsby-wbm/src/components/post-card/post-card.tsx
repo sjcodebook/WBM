@@ -45,7 +45,7 @@ const PostCard: React.FunctionComponent<PostCardProps> = ({
     addAllClasses.push(className);
   }
 
-  url = `/${url}`;
+  url = `/blogs/${url}`;
 
   return (
     <PostCardWrapper className={addAllClasses.join(' ')} {...props}>

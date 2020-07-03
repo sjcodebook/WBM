@@ -82,7 +82,7 @@ const Posts: React.FunctionComponent<PostsProps> = () => {
         })}
       </PostRow>
       <SeeMore>
-        <Link to="page/1">
+        <Link to="blogs/1">
           <Button title="See more" type="submit" />
         </Link>
       </SeeMore>
