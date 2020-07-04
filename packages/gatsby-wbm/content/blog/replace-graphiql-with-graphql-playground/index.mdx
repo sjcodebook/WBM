@@ -1,0 +1,72 @@
+---
+title: 'Replace Graphiql With Graphql Playground Using These Simple Steps'
+date: '2020-07-04T23:46:37.121Z'
+cover: './cover.png'
+description: Replace Graphiql With Graphql Playground Using These Simple Steps.
+tags: ['gatsby', 'gatsby-plugins', 'featured']
+slug: 'replace-graphiql-with-graphql-playground'
+hasJs: false
+---
+
+Graphiql is the default IDE for working with Graphql API in Gatsby. But Gatsby also support, newer and more featured IDE known as Graphql Playground. Graphql Playground provides us with additional features like a nice fully customizable UI interface, multiple tab options, detailed docs drawer, copy CURL option etc. These features makes building queries easy and fun.
+So, lets see how we can swap Graphiql for Graphql Playground.
+
+# Steps To Replace Graphiql To Graphql Playground:
+
+### 1) Install dotenv dependency
+
+For replacing the IDE we need to declare an environment variable and for that environment variable to load in `process.env` we need to use an dotenv package. You can install it by running this command.
+
+```shell{promptUser: wbm}{promptHost: localhost}
+npm install dotenv
+```
+
+<br />
+
+### 2) Define the environment variable
+
+For gatsby to know that we want to use Graphql Playground we need to define an environment variable `GATSBY_GRAPHQL_IDE=playground`. We can define this variable in an `.env` file. Its a best practice to seperate environment variables for development and production. So, we can define the env files in our root folder like this `.env.development` and `.env.production`.
+
+```
+├── node_modules
+├── public
+├── src
+├── static
+├── .env.development
+├── .env.production
+```
+
+<br />
+
+Now, In the `.env.development` file define this key value pair.
+
+```
+--------------------
+||.env.development||
+--------------------
+GATSBY_GRAPHQL_IDE=playground
+```
+
+<br />
+
+### 3) Update gatsby-config.js
+
+Inside your gatsby-config.js file at the very top require the dotenv plugin and provide the path to the appropriate `.env` file.
+
+```javascript{4-6}
+--------------------
+||gatsby-config.js||
+--------------------
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
+module.exports = {
+  siteMetadata: {
+```
+
+<br />
+
+Now when you run `gatby develop`. it will set the `NODE_ENV` to development, and the dotenv package will load the environment variables defined in `.env.development` file.
+
+Finally, go to `http://localhost:8000/___graphql` and use the newer and nicer Graphql Playground IDE.
