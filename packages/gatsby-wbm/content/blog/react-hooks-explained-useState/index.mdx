@@ -1,0 +1,341 @@
+---
+title: 'React Hooks Explained: useState( )'
+date: '2020-07-05T23:46:37.121Z'
+cover: './cover.png'
+description: Learn useState Hook In Under 10 Minutes.
+tags: ['reactjs', 'react-hooks', 'featured']
+slug: 'react-hooks-explained-useState'
+---
+
+import {
+  Counter,
+  CounterClass,
+  Counter2,
+  Counter3,
+  Counter4,
+  Counter5,
+} from './examples.jsx';
+
+Nowadays, managing state is the most crucial part in any application's architecture. Most applications behaviour depends on the values of states defined in them, So understanding how to manage it efficiently becomes very important. Before hooks introduction in React version 16.8, the only way to use state in your application is through class component. But now with the help of `useState` hook we can manage state in our functional components too. So, in this article we will be learning everything that we need to know about `useState` to get started with stateful functional components.
+
+# Comparing State Management in classes and functions
+
+Lets start by understanding the use of `useState` hook by looking at an example of a simple counter application written using React's functional component.
+
+```jsx{numberLines: true}
+import React, { useState } from 'react';
+
+export function Counter() {
+  const [count, setCount] = useState(0);
+  const [msg, setMsg] = useState('Use the below button to increase the count');
+
+  return (
+    <div>
+      <p>Counter: {count}</p>
+      <p>{msg}</p>
+      <button onClick={() => setCount(count + 1)}>Count</button>
+    </div>
+  );
+}
+```
+
+<br />
+
+#### Output:
+
+<div className="grey-bg">
+  <Counter />
+</div>
+
+<br />
+
+For comparison, lets also rewrite it into a class component.
+
+```jsx{numberLines: true}
+import React, { Component } from 'react';
+export class CounterClass extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+      msg: 'Use the below button to increase the count',
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        <p>CounterClass: {this.state.count}</p>
+        <p>{this.state.msg}</p>
+        <button onClick={() => this.setState({ count: this.state.count + 1 })}>
+          Count
+        </button>
+      </div>
+    );
+  }
+}
+```
+
+<br />
+
+#### Output:
+
+<div className="grey-bg">
+  <CounterClass />
+</div>
+
+<br />
+
+Okay now lets compare each aspect one by one.
+
+## Defining initial state
+
+In a class component, initial state is defined as an object inside the constructor containing all the state for the component.
+
+```jsx
+constructor(props) {
+  super(props);
+  this.state = {
+    count: 0,
+    msg: 'Use the below button to increase the count',
+  };
+}
+```
+
+<br />
+
+But in a functional component, we define the initial state by passing it as an argument in the `useState` hook.
+
+```jsx
+useState(initialState);
+```
+
+<br />
+
+The return value of `useState` hook is an array containing the current state and a function to update the value of current state.
+
+```jsx
+const [state, setState] = useState(initialState);
+```
+
+<br />
+
+Now, like in a class component we can define all state for a component in a single `useState` hook.
+
+```jsx
+const [state, setState] = useState({
+  count: 0,
+  msg: 'Use the below button to increase the count',
+});
+```
+
+<br />
+
+But it is a recommended practice to use individual `useState` hook for managing each state. As it is cleaner and easier to maintain.
+
+```jsx
+const [count, setCount] = useState(0);
+const [msg, setMsg] = useState('Use the below button to increase the count');
+```
+
+<br />
+
+Now, there can be situations where the initial state you are defining may require time to get resolve. Passing this as initial state in `useState` hook can slow down the whole application. As you know, in functional components the initial state is declared in the render function and its value updates at every render. This is not a problem in class component as the initial state is defined in the constructor which is called only once at the start.
+
+But there is a solution, `useState` also take function as the argument. the `useState` will run this function only once when the component is rendered first time. We can pass the function in `useState` like this
+
+```jsx
+useState(() => {
+  // Some heavy computation task
+});
+```
+
+<br />
+
+## Updating the State
+
+In class component, we can update the count by calling `this.setState`.
+
+```jsx
+this.setState({ count: this.state.count + 1 });
+```
+
+<br />
+
+Or by returning the updated value of count from a function in `this.setState`.
+
+```jsx
+this.setState((prevState) => {
+  return { count: prevState.count + 1 };
+});
+```
+
+<br />
+
+In functional components, as we are using individual `useState` for each state. We can easily update the value of count by calling the `setCount` function like this
+
+```jsx
+setCount(count + 1);
+```
+
+<br />
+
+But if you are depending on the previous state for updating to new state. It is recommended to use the function in `setState` like this
+
+```jsx
+setCount((prevCount) => prevCount + 1);
+```
+
+<br />
+
+The reason behind this is say you want to update the state two times in a function and you try to do it like this
+
+```jsx{11-12}
+export function Counter() {
+  const [count, setCount] = useState(0);
+  const [msg, setMsg] = useState('Use the below button to increase the count');
+
+  return (
+    <div>
+      <p>Counter: {count}</p>
+      <p>{msg}</p>
+      <button
+        onClick={() => {
+          setCount(count + 1);
+          setCount(count + 1);
+        }}
+      >
+        Count
+      </button>
+    </div>
+  );
+}
+```
+
+<br />
+
+#### Output:
+
+<div className="grey-bg">
+  <Counter2 />
+</div>
+
+<br />
+
+But you will see that the `count` value is still updating by one. This is because the `count` value in the `setCount` is the same when we render our functional component and `count` value doesn't change inside of the function from where it is called. So, in the above code the `count` value is same in both `setCount`, overriding eachothers value resulting in value of `count` increased by just one.
+
+Now, if we use the function in `setCount`. We can get the desired result as the updated `count` value gets stored in the `prevCount` and we can use the `prevcount` to correctly update the value of `count` inside the function.
+
+```jsx{11-12}
+export function Counter() {
+  const [count, setCount] = useState(0);
+  const [msg, setMsg] = useState('Use the below button to increase the count');
+
+  return (
+    <div>
+      <p>Counter: {count}</p>
+      <p>{msg}</p>
+      <button
+        onClick={() => {
+          setCount((prevCount) => prevCount + 1);
+          setCount((prevCount) => prevCount + 1);
+        }}
+      >
+        Count
+      </button>
+    </div>
+  );
+}
+```
+
+<br />
+
+#### Output:
+
+<div className="grey-bg">
+  <Counter3 />
+</div>
+
+<br />
+
+Lastly, if you are using the single `useState` hook to manage all states like this
+
+```jsx
+const [state, setState] = useState({
+  count: 0,
+  msg: 'Use the below button to increase the count',
+});
+```
+
+<br />
+
+You need to remember that when updating only the value of `count`. Unlike `this.setState`, `setState` will overwrite the whole `state` object to the new object having only value of `count`. You can see in the output of the code below that after clicking the count button the message will get dissappear.
+
+```jsx{2-5, 9-11}
+export function Counter() {
+  const [state, setState] = useState({
+    count: 0,
+    msg: 'Use the below button to increase the count',
+  });
+
+  return (
+    <div>
+      <p>Counter: {state.count}</p>
+      <p>{state.msg}</p>
+      <button onClick={() => setState({ count: 1 })}>Count</button>
+    </div>
+  );
+}
+```
+
+<br />
+
+#### Output:
+
+<div className="grey-bg">
+  <Counter4 />
+</div>
+
+<br />
+
+In order to avoid this you will need to pass the old state with the new state in `setState`.
+
+```jsx{13-16}
+export function Counter() {
+  const [state, setState] = useState({
+    count: 0,
+    msg: 'Use the below button to increase the count',
+  });
+
+  return (
+    <div>
+      <p>Counter: {state.count}</p>
+      <p>{state.msg}</p>
+      <button
+        onClick={() =>
+          setState((prevState) => {
+            // Expanding prevState object using spread operator
+            return { ...prevState, count: 1 };
+          })
+        }
+      >
+        Count
+      </button>
+    </div>
+  );
+}
+```
+
+<br />
+
+#### Output:
+
+<div className="grey-bg">
+  <Counter5 />
+</div>
+
+<br />
+
+# Conclusion
+
+`useState` provides a cleaner and a maintainable way to manage states in an application. After reading this article you are ready to start using `useState` in your react projects like a pro.

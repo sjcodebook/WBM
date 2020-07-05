@@ -2,7 +2,6 @@ import * as React from 'react';
 import Img from 'gatsby-image';
 import { Link } from 'gatsby';
 import _ from 'lodash';
-import * as Jscomp from './hasJs';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import {
   PostDetailsWrapper,
@@ -15,23 +14,19 @@ import {
 } from './post-details.style';
 
 type PostDetailsProps = {
-  slug: string;
   title: string;
   date?: string;
   preview?: any;
   description: any;
-  hasJs: boolean;
   tags?: [];
   className?: string;
 };
 
 const PostDetails: React.FunctionComponent<PostDetailsProps> = ({
-  slug,
   title,
   date,
   preview,
   description,
-  hasJs,
   tags,
   className,
   ...props
@@ -58,40 +53,32 @@ const PostDetails: React.FunctionComponent<PostDetailsProps> = ({
   const setColor =
     placeholderColors[Math.floor(Math.random() * placeholderColors.length)];
 
-  if (!hasJs) {
-    return (
-      <PostDetailsWrapper {...props} className={addClass.join(' ')}>
-        <PostTitle>{title}</PostTitle>
-        <PostDate>{date}</PostDate>
-        {preview == null ? null : (
-          <PostPreview className="post_preview">
-            <Img fluid={preview} alt={title} backgroundColor={setColor} />
-          </PostPreview>
+  return (
+    <PostDetailsWrapper {...props} className={addClass.join(' ')}>
+      <PostTitle>{title}</PostTitle>
+      <PostDate>{date}</PostDate>
+      {preview == null ? null : (
+        <PostPreview className="post_preview">
+          <Img fluid={preview} alt={title} backgroundColor={setColor} />
+        </PostPreview>
+      )}
+
+      <PostDescriptionWrapper className="post_des_wrapper">
+        <PostDescription className="post_des">
+          <MDXRenderer>{description}</MDXRenderer>
+        </PostDescription>
+        {tags == null ? null : (
+          <PostTags>
+            {tags.map((tag, index) => (
+              <Link key={index} to={`/tags/${_.kebabCase(tag)}/`}>
+                {`#${tag}`}
+              </Link>
+            ))}
+          </PostTags>
         )}
-
-        <PostDescriptionWrapper className="post_des_wrapper">
-          <PostDescription className="post_des">
-            <MDXRenderer>{description}</MDXRenderer>
-          </PostDescription>
-          {tags == null ? null : (
-            <PostTags>
-              {tags.map((tag, index) => (
-                <Link key={index} to={`/tags/${_.kebabCase(tag)}/`}>
-                  {`#${tag}`}
-                </Link>
-              ))}
-            </PostTags>
-          )}
-        </PostDescriptionWrapper>
-      </PostDetailsWrapper>
-    );
-  } else {
-    return Jscomp[slug]();
-  }
-};
-
-PostDetails.defaultProps = {
-  hasJs: false,
+      </PostDescriptionWrapper>
+    </PostDetailsWrapper>
+  );
 };
 
 export default PostDetails;

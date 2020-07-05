@@ -206,5 +206,13 @@ const ResetCSS = createGlobalStyle`
   content: attr(data-prompt);
 }
 
+.grey-bg {
+  background-color: #d4d9d6;
+  border-radius: 0.3em;
+  margin: 0.5em 0;
+  padding: 1em;
+  overflow: auto;
+}
+
 `;
 export default ResetCSS;
