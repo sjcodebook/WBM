@@ -1,0 +1,112 @@
+---
+title: 'Connect To GitHub Using SSH'
+date: '2020-07-10T23:46:37.121Z'
+cover: './cover.png'
+description: Steps to use SSH in place of HTTPS for accessing github repositories.
+tags: ['git', 'github', 'ssh', 'featured']
+slug: 'connect-to-github-using-ssh'
+---
+
+Github provides two network protocols, `HTTPS & SSH` to clone, pull and push changes to your repositories from your machine. Both have their own pros and cons. Personally i use `SSH` for all of my Git activities. Because compared to `HTTPS`, using `SSH` keys is more secure and saves me more time by doesn't requiring me to enter my username and password every time i perform a push or pull operation. Let me elaborate on why i find `SSH` more secure and convienient than `HTTPS`.
+
+# SSH Vs HTTPS
+
+If you are using `HTTPS`, you are using the same username and password of your github account to access remote repositories from your machine. So, if those details gets compromised. Then, the attacker can access everything in your account. They can even change the master password and can lock you out of your own account.
+
+With `SSH`, Even if, your computer gets stolen and an attacker gets access to your private key. They will not be able to gain full control of your github account and you can quickly remove the compromised key by logging in your github account with the master password.
+
+Setting up `SSH` keys for the first time requires a little setup, but in the long run, it pays by providing you the extra control and security of your account. Also, by using `SSH` you will never again required to type your username and password for accessing your Github account.
+
+# Steps To Generate And Add SSH Keys To Your GitHub:
+
+### 1) Genrate your SSH keys
+
+First step is to generate your own `SSH` key pairs. You can do that by running the below command.
+
+```shell{promptUser: wbm}{promptHost: localhost}
+ssh-keygen -o -t rsa -C "your@email.com"
+```
+
+(Remember to replace the comment with your own email)
+
+After That, you will be asked for the path to save the keys. hit enter to accept the default location.
+
+```
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/sj/.ssh/id_rsa):
+```
+
+<br />
+
+Next, you will get an option to provide the passphrase to make your keys more secure. This is optional and you can skip it by pressing enter two times.
+
+```
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+```
+
+<br />
+
+Finally, After your keys are generated. You will see the below message.
+
+```
+Your identification has been saved in /home/sj/.ssh/id_rsa
+Your public key has been saved in /home/sj/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:40XYRaLv66J9UVk1wrMVgMFQh0/BaV5OhJG2ZsOsbEU your@email.com
+The key's randomart image is:
++---[RSA 3072]----+
+|         .=+O*O=o|
+|         + *.Eo+.|
+|        o o XoO  |
+|         o  o% . |
+|        S +.= .  |
+|       . +.+     |
+|        . o.     |
+|       .. ..     |
+|      ...+o      |
++----[SHA256]-----+
+
+```
+
+<br />
+
+### 2) Adding your public key to GitHub
+
+So, we have generated our `SSH` key pairs. Now, we need to register our public key on github for that we can access content of our public key by using `cat` command.
+
+```shell{promptUser: wbm}{promptHost: localhost}
+cat ~/.ssh/id_rsa.pub
+```
+
+<br />
+
+Output:
+
+```
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDOXmwRpIsoXEQsKgw1Y43+yJ8JaU2iY1uc45pg7VcD9Pim748LcUzoa8YHF14yE6LeD9YVZcdu1PHC2xOJP5/eVzweBEFHq4onzNZZ5mO04+2WZQB72d6drJKJce+JXtHv8S3PWZQFYXA6cueBZwpiSeMI1Bu5Sz+idafsw4QY01E9JBDWOtx8d468u2uLeMl8rlFj+0uiN/K9tDlMuiH3U8B3XcH3bYBky0C2bQxeSZ4l3o/X76rt0tythOxxd/Xasw461wFQYYNYqLRZKHxryg/5uTBzOMIVXBykTzH1ffBx/BoZioBVsWeH/uPC5i6zle800MZEBylWDpHh8VBp7NBrEQEwJqPrHEtchIyiFkBSMUKoAUku2EzyT7aFxM+O0hAJMZ9wqHX0qdF0zJb0U4rMysyuAs+MVK54e6dMXqV0ai03jOde9/TibDMdeKYZ8SygxhbKH8ibNIwwoF/YtyJoqsBRiOj8R2YN/GCnijNlB8sMq6J4XRcfl7JKyp0= your@email.comcat ~/.ssh/id_rsa.pub
+```
+
+Copy the above public `SSH` key to your clipboard
+
+Visit github.com, Login to your account, Go to your account settings and select `SSH and GPG keys` option from side the menu. Click on **New SSH key** button.
+
+![Github Settings Page](github-settings.png 'Github Settings Page')
+
+Give your new key a relevant title and paste the public key that you have previously saved in your clipboard into the **Key** text box.
+
+![Add Public SSH Key](add-pub-key.png 'Add Public SSH Key')
+
+Finally, click **Add SSH Key** and enter your github password to save the key.
+
+Now, You can use SSH to clone your repositories to your local machine.
+
+![Clone Using SSH](using-ssh-to-clone.png 'Clone Using SSH')
+
+```shell{promptUser: wbm}{promptHost: localhost}
+git clone git@github.com:sjcodebook/WBM.git
+```
+
+<br />
+
+Enjoy the **secure** freedom 🍻!!
