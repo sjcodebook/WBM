@@ -39,7 +39,7 @@ const BlogPostTemplate = (props: any) => {
   const title = post.frontmatter.title;
   const slug = post.fields.slug;
   const siteUrl = props.data.site.siteMetadata.siteUrl;
-  const shareUrl = urljoin(siteUrl, slug);
+  const shareUrl = urljoin(siteUrl, 'blogs', slug);
 
   const disqusConfig = {
     shortname: process.env.DISQUS_NAME,
