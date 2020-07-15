@@ -62,6 +62,10 @@ const SEO: React.FunctionComponent<SEOProps> = ({
           content: `website`,
         },
         {
+          property: `og:image`,
+          content: imageUrl,
+        },
+        {
           name: `twitter:image`,
           content: imageUrl,
         },
