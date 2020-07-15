@@ -51,6 +51,11 @@ const BlogPostTemplate = (props: any) => {
       <SEO
         title={post.frontmatter.title}
         description={post.frontmatter.description || post.excerpt}
+        image={
+          post.frontmatter.cover == null
+            ? ''
+            : post.frontmatter.cover.childImageSharp.fluid
+        }
       />
       <BlogPostDetailsWrapper>
         <BlogDetailsContent>

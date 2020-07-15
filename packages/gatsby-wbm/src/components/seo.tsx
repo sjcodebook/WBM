@@ -1,14 +1,15 @@
-import React from "react"
-import Helmet from "react-helmet"
-import { useStaticQuery, graphql } from "gatsby"
+import React from 'react';
+import Helmet from 'react-helmet';
+import { useStaticQuery, graphql } from 'gatsby';
 
 type SEOProps = {
-  description?: string
-  lang?: string
-  meta?: any
-  keywords?: any
-  title: string
-}
+  description?: string;
+  lang?: string;
+  meta?: any;
+  keywords?: any;
+  title: string;
+  image?: string;
+};
 
 const SEO: React.FunctionComponent<SEOProps> = ({
   description,
@@ -16,6 +17,7 @@ const SEO: React.FunctionComponent<SEOProps> = ({
   meta,
   keywords,
   title,
+  image,
 }) => {
   const { site } = useStaticQuery(
     graphql`
@@ -29,9 +31,9 @@ const SEO: React.FunctionComponent<SEOProps> = ({
         }
       }
     `
-  )
+  );
 
-  const metaDescription = description || site.siteMetadata.description
+  const metaDescription = description || site.siteMetadata.description;
 
   return (
     <Helmet
@@ -56,6 +58,10 @@ const SEO: React.FunctionComponent<SEOProps> = ({
         {
           property: `og:type`,
           content: `website`,
+        },
+        {
+          name: `twitter:image`,
+          content: image,
         },
         {
           name: `twitter:card`,
@@ -84,14 +90,15 @@ const SEO: React.FunctionComponent<SEOProps> = ({
         )
         .concat(meta)}
     />
-  )
-}
+  );
+};
 
 SEO.defaultProps = {
   lang: `en`,
   meta: [],
   keywords: [],
   description: ``,
-}
+  image: '',
+};
 
-export default SEO
+export default SEO;
