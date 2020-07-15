@@ -27,6 +27,7 @@ const SEO: React.FunctionComponent<SEOProps> = ({
             title
             description
             author
+            siteUrl
           }
         }
       }
@@ -34,6 +35,7 @@ const SEO: React.FunctionComponent<SEOProps> = ({
   );
 
   const metaDescription = description || site.siteMetadata.description;
+  const imageUrl = image ? `${site.siteMetadata.siteUrl}${image}` : '';
 
   return (
     <Helmet
@@ -61,7 +63,7 @@ const SEO: React.FunctionComponent<SEOProps> = ({
         },
         {
           name: `twitter:image`,
-          content: image,
+          content: imageUrl,
         },
         {
           name: `twitter:card`,

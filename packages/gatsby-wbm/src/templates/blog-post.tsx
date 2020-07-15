@@ -52,9 +52,7 @@ const BlogPostTemplate = (props: any) => {
         title={post.frontmatter.title}
         description={post.frontmatter.description || post.excerpt}
         image={
-          post.frontmatter.cover == null
-            ? ''
-            : post.frontmatter.cover.childImageSharp.fluid
+          post.frontmatter.cover == null ? '' : post.frontmatter.cover.publicURL
         }
       />
       <BlogPostDetailsWrapper>
