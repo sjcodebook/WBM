@@ -24,6 +24,7 @@ const Banner: React.FunctionComponent<BannerProps> = () => {
               date(formatString: "DD [<span>] MMM [</span>]")
               title
               description
+              visibility
               tags
               cover {
                 childImageSharp {
@@ -48,6 +49,9 @@ const Banner: React.FunctionComponent<BannerProps> = () => {
           <Title>Featured Posts</Title>
           {Posts.map(({ node }: any) => {
             const title = node.frontmatter.title || node.fields.slug;
+            const visibility = node.frontmatter.visibility
+              ? node.frontmatter.visibility
+              : false;
             // Random Placeholder Color
             const placeholderColors = [
               '#55efc4',
@@ -67,18 +71,24 @@ const Banner: React.FunctionComponent<BannerProps> = () => {
               ];
 
             return (
-              <FeaturePost
-                key={node.fields.slug}
-                title={title}
-                image={
-                  node.frontmatter.cover == null
-                    ? null
-                    : node.frontmatter.cover.childImageSharp.fluid
-                }
-                url={node.fields.slug}
-                tags={node.frontmatter.tags}
-                placeholderBG={setColor}
-              />
+              <>
+                {visibility ? (
+                  <FeaturePost
+                    key={node.fields.slug}
+                    title={title}
+                    image={
+                      node.frontmatter.cover == null
+                        ? null
+                        : node.frontmatter.cover.childImageSharp.fluid
+                    }
+                    url={node.fields.slug}
+                    tags={node.frontmatter.tags}
+                    placeholderBG={setColor}
+                  />
+                ) : (
+                  ''
+                )}
+              </>
             );
           })}
         </FeaturePosts>

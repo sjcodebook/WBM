@@ -8,6 +8,10 @@ import SEO from '../components/seo';
 import PostCard from '../components/post-card/post-card';
 import PostDetails from '../components/post-details/post-details';
 import Sidebar from '../containers/sidebar';
+import Navbar from '../components/navbar/navbar';
+import ResetCss from '../components/reset-css';
+import NotFound from '../containers/not-found';
+import Footer from '../components/footer/footer';
 import {
   FacebookShareButton,
   TwitterShareButton,
@@ -37,9 +41,10 @@ const BlogPostTemplate = (props: any) => {
   const post = props.data.mdx;
   const { edges } = props.data.allMdx;
   const title = post.frontmatter.title;
+  const visibility = post.frontmatter.visibility;
   const slug = post.fields.slug;
   const siteUrl = props.data.site.siteMetadata.siteUrl;
-  const shareUrl = urljoin(siteUrl, slug);
+  const shareUrl = urljoin(siteUrl, 'blogs', slug);
 
   const disqusConfig = {
     shortname: process.env.DISQUS_NAME,
@@ -47,107 +52,131 @@ const BlogPostTemplate = (props: any) => {
   };
 
   return (
-    <Layout>
-      <SEO
-        title={post.frontmatter.title}
-        description={post.frontmatter.description || post.excerpt}
-      />
-      <BlogPostDetailsWrapper>
-        <BlogDetailsContent>
-          <PostDetails
+    <>
+      {visibility ? (
+        <Layout>
+          <SEO
             title={post.frontmatter.title}
-            date={post.frontmatter.date}
-            preview={
+            description={post.frontmatter.description || post.excerpt}
+            image={
               post.frontmatter.cover == null
-                ? null
-                : post.frontmatter.cover.childImageSharp.fluid
+                ? ''
+                : post.frontmatter.cover.publicURL
             }
-            description={post.body}
           />
+          <BlogPostDetailsWrapper>
+            <BlogDetailsContent>
+              <PostDetails
+                title={post.frontmatter.title}
+                date={post.frontmatter.date}
+                preview={
+                  post.frontmatter.cover == null
+                    ? null
+                    : post.frontmatter.cover.childImageSharp.fluid
+                }
+                description={post.body}
+              />
 
-          <BlogPostFooter>
-            {post.frontmatter.tags == null ? null : (
-              <PostTags className="post_tags">
-                {post.frontmatter.tags.map((tag: string, index: number) => (
-                  <Link key={index} to={`/tags/${_.kebabCase(tag)}/`}>
-                    {`#${tag}`}
-                  </Link>
-                ))}
-              </PostTags>
-            )}
-            <PostShare>
-              <span>Share This:</span>
-              <FacebookShareButton url={shareUrl} quote={post.excerpt}>
-                <IoLogoFacebook />
-              </FacebookShareButton>
-              <TwitterShareButton url={shareUrl} title={title}>
-                <IoLogoTwitter />
-              </TwitterShareButton>
-              <PinterestShareButton
-                url={shareUrl}
-                media={urljoin(siteUrl, post.frontmatter.cover.publicURL)}
-              >
-                <IoLogoPinterest />
-              </PinterestShareButton>
-              <RedditShareButton
-                url={shareUrl}
-                title={`${post.frontmatter.title}`}
-              >
-                <IoLogoReddit />
-              </RedditShareButton>
-            </PostShare>
-          </BlogPostFooter>
+              <BlogPostFooter>
+                {post.frontmatter.tags == null ? null : (
+                  <PostTags className="post_tags">
+                    {post.frontmatter.tags.map((tag: string, index: number) => (
+                      <Link key={index} to={`/tags/${_.kebabCase(tag)}/`}>
+                        {`#${tag}`}
+                      </Link>
+                    ))}
+                  </PostTags>
+                )}
+                <PostShare>
+                  <span>Share This:</span>
+                  <FacebookShareButton url={shareUrl} quote={post.excerpt}>
+                    <IoLogoFacebook />
+                  </FacebookShareButton>
+                  <TwitterShareButton url={shareUrl} title={title}>
+                    <IoLogoTwitter />
+                  </TwitterShareButton>
+                  <PinterestShareButton
+                    url={shareUrl}
+                    media={urljoin(siteUrl, post.frontmatter.cover.publicURL)}
+                  >
+                    <IoLogoPinterest />
+                  </PinterestShareButton>
+                  <RedditShareButton
+                    url={shareUrl}
+                    title={`${post.frontmatter.title}`}
+                  >
+                    <IoLogoReddit />
+                  </RedditShareButton>
+                </PostShare>
+              </BlogPostFooter>
 
-          <BlogPostComment>
-            <DiscussionEmbed {...disqusConfig} />
-          </BlogPostComment>
-        </BlogDetailsContent>
-        <Sidebar />
-      </BlogPostDetailsWrapper>
+              <BlogPostComment>
+                <DiscussionEmbed {...disqusConfig} />
+              </BlogPostComment>
+            </BlogDetailsContent>
+            <Sidebar />
+          </BlogPostDetailsWrapper>
 
-      {edges.length !== 0 && (
-        <RelatedPostWrapper>
-          <RelatedPostTitle>Related Posts</RelatedPostTitle>
-          <RelatedPostItems>
-            {edges.map(({ node }: any) => {
-              // Random Placeholder Color
-              const placeholderColors = [
-                '#55efc4',
-                '#81ecec',
-                '#74b9ff',
-                '#a29bfe',
-                '#ffeaa7',
-                '#fab1a0',
-                '#e17055',
-                '#0984e3',
-                '#badc58',
-                '#c7ecee',
-              ];
-              const setColor =
-                placeholderColors[
-                  Math.floor(Math.random() * placeholderColors.length)
-                ];
-              return (
-                <RelatedPostItem key={node.fields.slug}>
-                  <PostCard
-                    title={node.frontmatter.title || node.fields.slug}
-                    url={node.fields.slug}
-                    image={
-                      node.frontmatter.cover == null
-                        ? null
-                        : node.frontmatter.cover.childImageSharp.fluid
-                    }
-                    tags={node.frontmatter.tags}
-                    placeholderBG={setColor}
-                  />
-                </RelatedPostItem>
-              );
-            })}
-          </RelatedPostItems>
-        </RelatedPostWrapper>
+          {edges.length !== 0 && (
+            <RelatedPostWrapper>
+              <RelatedPostTitle>Related Posts</RelatedPostTitle>
+              <RelatedPostItems>
+                {edges.map(({ node }: any) => {
+                  // Random Placeholder Color
+                  const placeholderColors = [
+                    '#55efc4',
+                    '#81ecec',
+                    '#74b9ff',
+                    '#a29bfe',
+                    '#ffeaa7',
+                    '#fab1a0',
+                    '#e17055',
+                    '#0984e3',
+                    '#badc58',
+                    '#c7ecee',
+                  ];
+                  const setColor =
+                    placeholderColors[
+                      Math.floor(Math.random() * placeholderColors.length)
+                    ];
+                  return (
+                    <RelatedPostItem key={node.fields.slug}>
+                      <PostCard
+                        title={node.frontmatter.title || node.fields.slug}
+                        url={node.fields.slug}
+                        image={
+                          node.frontmatter.cover == null
+                            ? null
+                            : node.frontmatter.cover.childImageSharp.fluid
+                        }
+                        tags={node.frontmatter.tags}
+                        placeholderBG={setColor}
+                      />
+                    </RelatedPostItem>
+                  );
+                })}
+              </RelatedPostItems>
+            </RelatedPostWrapper>
+          )}
+        </Layout>
+      ) : (
+        <>
+          <ResetCss />
+          <Navbar />
+          <SEO title="404: Not Found" />
+          <NotFound />
+          <Footer>
+            Copyright &copy; {new Date().getFullYear()}
+            <a href="https://webbrainsmedia.com"> WebBrainsMedia</a>
+          </Footer>
+        </>
       )}
-    </Layout>
+    </>
   );
+};
+
+BlogPostTemplate.defaultProps = {
+  visibility: false,
 };
 
 export default BlogPostTemplate;
@@ -170,6 +199,7 @@ export const pageQuery = graphql`
         title
         date(formatString: "DD MMM, YYYY")
         description
+        visibility
         tags
         cover {
           publicURL
@@ -185,7 +215,7 @@ export const pageQuery = graphql`
       limit: 3
       sort: { fields: [frontmatter___date], order: DESC }
       filter: {
-        frontmatter: { tags: { in: $tag } }
+        frontmatter: { tags: { in: $tag }, visibility: { eq: true } }
         fields: { slug: { ne: $slug } }
       }
     ) {

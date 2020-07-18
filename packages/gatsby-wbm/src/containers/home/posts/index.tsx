@@ -21,6 +21,7 @@ const Posts: React.FunctionComponent<PostsProps> = () => {
               date(formatString: "DD [<span>] MMM [</span>]")
               title
               description
+              visibility
               tags
               cover {
                 childImageSharp {
@@ -43,6 +44,9 @@ const Posts: React.FunctionComponent<PostsProps> = () => {
       <PostRow>
         {Posts.map(({ node }: any) => {
           const title = node.frontmatter.title || node.fields.slug;
+          const visibility = node.frontmatter.visibility
+            ? node.frontmatter.visibility
+            : false;
           // Random Placeholder Color
           const placeholderColors = [
             '#55efc4',
@@ -62,22 +66,28 @@ const Posts: React.FunctionComponent<PostsProps> = () => {
             ];
 
           return (
-            <PostGrid key={node.fields.slug}>
-              <PostCardModern
-                key={node.fields.slug}
-                title={title}
-                image={
-                  node.frontmatter.cover == null
-                    ? null
-                    : node.frontmatter.cover.childImageSharp.fluid
-                }
-                url={node.fields.slug}
-                description={node.excerpt}
-                date={node.frontmatter.date}
-                tags={node.frontmatter.tags}
-                placeholderBG={setColor}
-              />
-            </PostGrid>
+            <>
+              {visibility ? (
+                <PostGrid key={node.fields.slug}>
+                  <PostCardModern
+                    key={node.fields.slug}
+                    title={title}
+                    image={
+                      node.frontmatter.cover == null
+                        ? null
+                        : node.frontmatter.cover.childImageSharp.fluid
+                    }
+                    url={node.fields.slug}
+                    description={node.excerpt}
+                    date={node.frontmatter.date}
+                    tags={node.frontmatter.tags}
+                    placeholderBG={setColor}
+                  />
+                </PostGrid>
+              ) : (
+                ''
+              )}
+            </>
           );
         })}
       </PostRow>
