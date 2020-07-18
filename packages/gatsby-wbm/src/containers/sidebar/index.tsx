@@ -18,7 +18,11 @@ type SidebarProps = {};
 const Sidebar: React.FunctionComponent<SidebarProps> = () => {
   const Data = useStaticQuery(graphql`
     query {
-      allMdx(sort: { fields: [frontmatter___date], order: DESC }, limit: 5) {
+      allMdx(
+        sort: { fields: [frontmatter___date], order: DESC }
+        filter: { frontmatter: { visibility: { eq: true } } }
+        limit: 5
+      ) {
         edges {
           node {
             excerpt(pruneLength: 300)
