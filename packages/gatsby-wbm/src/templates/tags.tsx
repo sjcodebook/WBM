@@ -40,7 +40,9 @@ export const pageQuery = graphql`
     allMdx(
       limit: 2000
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { tags: { in: [$tag] } } }
+      filter: {
+        frontmatter: { tags: { in: [$tag] }, visibility: { eq: true } }
+      }
     ) {
       totalCount
       edges {

@@ -43,22 +43,28 @@ const BlogList = (props: any) => {
                 Math.floor(Math.random() * placeholderColors.length)
               ];
             return (
-              <PostGrid>
-                <PostCardModern
-                  key={node.fields.slug}
-                  title={node.frontmatter.title || node.fields.slug}
-                  image={
-                    node.frontmatter.cover == null
-                      ? null
-                      : node.frontmatter.cover.childImageSharp.fluid
-                  }
-                  url={node.fields.slug}
-                  description={node.frontmatter.description || node.excerpt}
-                  date={node.frontmatter.date}
-                  tags={node.frontmatter.tags}
-                  placeholderBG={setColor}
-                />
-              </PostGrid>
+              <>
+                {node.frontmatter.visibility ? (
+                  <PostGrid>
+                    <PostCardModern
+                      key={node.fields.slug}
+                      title={node.frontmatter.title || node.fields.slug}
+                      image={
+                        node.frontmatter.cover == null
+                          ? null
+                          : node.frontmatter.cover.childImageSharp.fluid
+                      }
+                      url={node.fields.slug}
+                      description={node.frontmatter.description || node.excerpt}
+                      date={node.frontmatter.date}
+                      tags={node.frontmatter.tags}
+                      placeholderBG={setColor}
+                    />
+                  </PostGrid>
+                ) : (
+                  ''
+                )}
+              </>
             );
           })}
         </PostRow>
@@ -100,6 +106,7 @@ export const pageQuery = graphql`
             date(formatString: "DD [<span>] MMMM [</span>]")
             title
             description
+            visibility
             tags
             cover {
               childImageSharp {
