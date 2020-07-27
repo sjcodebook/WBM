@@ -1,0 +1,224 @@
+---
+title: 'The Console Object In Javascript'
+date: '2020-07-28T23:46:37.121Z'
+cover: './cover.png'
+description: Steps to use SSH in place of HTTPS for accessing github repositories.
+tags: ['javascript', 'featured']
+slug: 'the-console-object-in-javascript'
+visibility: true
+---
+
+Javascript provides a global object called `console` which gives us the ability to access the browser's debugging console. If you have ever worked with javascript you must have used it with its `log` property. But it is not limited to that, try running the below command
+
+```js
+console.log(console);
+```
+
+<br />
+
+You will see the capabilities that this console object comes with.
+
+![Console Object](console-object.png 'Console Object')
+
+<br />
+
+Let's take a look at some useful ones:
+
+## 1) console.log()
+
+This is the most commonly used property. It is used to print out anything to the web console that we put inside of `log()`.
+
+#### Usage:
+
+```js
+console.log('foo');
+console.log(10);
+console.log(null);
+console.log(undefined);
+console.log(['foo', 'bar']);
+console.log({ foo: 'hello', bar: 'hi' });
+```
+
+#### Output:
+
+![Console Log Object](console-log.png 'Console Log Object')
+
+<br />
+
+## 2) console.table()
+
+This property allows us to visualize data as tables inside our web console. The input data must be an array or an object.
+
+#### Usage:
+
+```js
+console.table(['foo', 'bar']);
+```
+
+#### Output:
+
+![Console Table Object](console-table-array.png 'Console Table Object')
+
+```js
+console.table({ foo: 'hello', bar: 'hi' });
+```
+
+#### Output:
+
+![Console Table Object](console-table-obj.png 'Console Table Object')
+
+<br />
+
+## 3) console.error()
+
+This property is used to log error message to the web console. By default, the error message will appear in red color. Mainly used at the time of code testing.
+
+#### Usage:
+
+```js
+console.error('You Have Got An Error');
+```
+
+#### Output:
+
+![Console Error Object](console-error.png 'Console Error Object')
+
+<br />
+
+## 4) console.warn()
+
+This property is used to log warning message to the web console. By default, the warning message will appear in yellow color.
+
+#### Usage:
+
+```js
+console.warn('You Have Got A Warning');
+```
+
+#### Output:
+
+![Console Warn Object](console-warn.png 'Console Warn Object')
+
+<br />
+
+## 5) console.assert()
+
+This property gives an error message to the web console only if the first argument is false. If assertion is true, it prints out nothing.
+
+#### Usage:
+
+```js
+let obj = { name: 'Sam', age: '20' };
+console.assert(obj['birth'], `obj doesn't contain birth key`);
+```
+
+#### Output:
+
+![Console Assert Object](console-assert.png 'Console Assert Object')
+
+<br />
+
+## 6) console.count()
+
+This property logs the number of times the same instance of `count()` is called.
+
+#### Usage:
+
+```js
+console.count('foo');
+console.count('foo');
+console.count('bar');
+console.count('bar');
+console.count('bar');
+```
+
+#### Output:
+
+![Console Count Object](console-count.png 'Console Count Object')
+
+<br />
+
+## 7) console.group()
+
+This property is used to group the output in level indented blocks in our web console. To define the group start, use `console.group()` and to define the end, use `console.groupEnd()`.
+
+#### Usage:
+
+```js
+console.log('Outer Log');
+console.group('Outer Group');
+console.log('Level 1');
+console.group('Inner Group');
+console.log('Level 2');
+console.error('Level 2');
+console.groupEnd();
+console.log('Level 1');
+console.groupEnd();
+```
+
+#### Output:
+
+![Console Group Object](console-group.png 'Console Group Object')
+
+<br />
+
+## 8) console.time()
+
+This property is used to keep track of the time that is passed between two console logs. To start the timer, use `console.time('label')` and to stop the timer, use `console.timeEnd('label')`. Remember to use the same label in both `time()` and `timeEnd()`.
+
+#### Usage:
+
+```js
+console.time('time');
+let i = 0;
+while (i < 100000) {
+  i++;
+}
+console.timeEnd('time');
+```
+
+#### Output:
+
+![Console Time Object](console-time.png 'Console Time Object')
+
+<br />
+
+## 9) console.trace()
+
+This property logs the stack trace in the web console. Very useful feature when working with nested functions.
+
+#### Usage:
+
+```js
+const func1 = () => {
+  const func2 = () => {
+    console.trace();
+  };
+  func2();
+};
+
+func1();
+```
+
+#### Output:
+
+![Console Trace Object](console-trace.png 'Console Trace Object')
+
+<br />
+
+## 10) Styling In Console
+
+We can also style our logs using CSS in our web console. We just need to pass our styles as a parameter and they will get applied to the logs.
+
+#### Usage:
+
+```js
+console.log(
+  '%cWebBrainsMedia',
+  'background-color: black; color: orange; font-style:  italic;  font-size: 2em; padding: 10px;'
+);
+```
+
+#### Output:
+
+![Console Styling](console-styling.png 'Console Styling')
