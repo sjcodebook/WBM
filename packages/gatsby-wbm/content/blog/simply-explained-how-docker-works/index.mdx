@@ -1,8 +1,15 @@
 ---
-title: 'Simply Explained: How Docker Works (The PID Namespace)'
+title: 'Simply Explained: What Is Docker And How Does It Works'
 date: '2020-07-19T23:46:37.121Z'
 cover: './cover.png'
-description: 'This article focuses on how docker uses the PID Namespace feature of Linux Kernel to provide us with isolated workspaces that we know as containers.'
+description: 'This article mainly focuses on how docker uses the PID Namespace feature of Linux Kernel to provide us with isolated workspaces that we know as containers.'
 tags: ['docker', 'devops', 'featured']
 slug: 'simply-explained-how-docker-works'
+visibility: true
 ---
+
+Docker is an incredible tool. It had gained immense popularity in recent years, Many tech companies are shifting to Docker for their application's development, testing, and deployment needs. Chances are you most probably use docker or want to dip your toe in the docker world. So, lets start this article by first getting a breif overview on what is docker and how it is different from traditional virtual machines.
+
+## What Is Docker?
+
+Docker is an open-source containerization platform. It gives us the ability to build `Containers`. What are `Containers`? `Containers` are completely isolated environments having their own set of processes, their own networks, their own mounts and other essential assets. They are lightweight and super portable. Generally, `Containers` are of many types like LXC, LXD, RKT, OPENVZ etc. But docker uses LXC i.e linux based `Containers`. The main feature of docker containers is that unlike virtual machines they share the same OS kernel.
