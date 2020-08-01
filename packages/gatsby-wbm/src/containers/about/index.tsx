@@ -1,43 +1,43 @@
-import * as React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
-import Image from 'gatsby-image'
-import SocialProfile from '../../components/social-profile/social-profile'
+import * as React from 'react';
+import { useStaticQuery, graphql } from 'gatsby';
+import Image from 'gatsby-image';
+import SocialProfile from '../../components/social-profile/social-profile';
 import {
   IoLogoFacebook,
   IoLogoTwitter,
   IoLogoInstagram,
   IoLogoLinkedin,
-} from 'react-icons/io'
+} from 'react-icons/io';
 import {
   AboutWrapper,
   AboutImage,
   AboutPageTitle,
   AboutDetails,
   SocialProfiles,
-} from './style'
+} from './style';
 
 const SocialLinks = [
   {
     icon: <IoLogoFacebook />,
-    url: 'https://www.facebook.com/redqinc/',
+    url: 'https://www.facebook.com/webbrainsmedia',
     tooltip: 'Facebook',
   },
   {
     icon: <IoLogoInstagram />,
-    url: 'https://www.instagram.com/redqinc/',
+    url: 'https://www.instagram.com/webbrainsmedia/',
     tooltip: 'Instagram',
   },
   {
     icon: <IoLogoTwitter />,
-    url: 'https://twitter.com/redqinc',
+    url: 'https://twitter.com/jainsanmati846',
     tooltip: 'Twitter',
   },
   {
     icon: <IoLogoLinkedin />,
-    url: 'https://www.linkedin.com/company/redqinc/',
+    url: 'https://www.linkedin.com/in/sjcodebook/',
     tooltip: 'Linked In',
   },
-]
+];
 
 interface AboutProps {}
 
@@ -58,7 +58,7 @@ const About: React.FunctionComponent<AboutProps> = () => {
         }
       }
     }
-  `)
+  `);
 
   return (
     <AboutWrapper>
@@ -83,12 +83,12 @@ const About: React.FunctionComponent<AboutProps> = () => {
           questions, and much more... So stay tuned!!
         </p>
 
-        {/* <SocialProfiles>
+        <SocialProfiles>
           <SocialProfile items={SocialLinks} />
-        </SocialProfiles> */}
+        </SocialProfiles>
       </AboutDetails>
     </AboutWrapper>
-  )
-}
+  );
+};
 
-export default About
+export default About;

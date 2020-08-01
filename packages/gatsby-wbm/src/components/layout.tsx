@@ -1,18 +1,19 @@
-import React from 'react'
-import Sticky from 'react-stickynode'
-import { ThemeProvider } from 'styled-components'
-import ScrollToTop from 'react-scroll-up'
-import Navbar from './navbar/navbar'
-import Newsletter from './newsletter/newsletter'
-import Footer from './footer/footer'
-import ScrollUpButton from './scroll-up-button/scroll-up-button'
-import ResetCss from './reset-css'
-import { theme } from '../theme'
-import { Link } from 'gatsby'
+import React from 'react';
+import Sticky from 'react-stickynode';
+import { ThemeProvider } from 'styled-components';
+import ScrollToTop from 'react-scroll-up';
+import Navbar from './navbar/navbar';
+import Newsletter from './newsletter/newsletter';
+import Footer from './footer/footer';
+import ScrollUpButton from './scroll-up-button/scroll-up-button';
+import ResetCss from './reset-css';
+import { theme } from '../theme';
+import { Link } from 'gatsby';
+import SpeedDialTooltipOpen from '../components/social-tray/social';
 
 type LayoutProps = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
 const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
   return (
@@ -50,9 +51,10 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
         >
           <ScrollUpButton />
         </ScrollToTop>
+        <SpeedDialTooltipOpen />
       </>
     </ThemeProvider>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;
