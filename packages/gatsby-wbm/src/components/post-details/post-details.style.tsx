@@ -70,6 +70,26 @@ export const PostDate = styled.span`
   }
 `;
 
+export const PostAuthor = styled.span`
+  text-align: left;
+  font-size: ${themeGet('fontSizes.3', '15')}px;
+  color: ${themeGet('textColor', '#292929')};
+  font-weight: 400;
+  margin-top: 10px;
+  text-transform: titlecase;
+  a {
+    font-weight: 500;
+    transition: 0.15s ease-in-out;
+    color: ${themeGet('primary', '#D10068')};
+  }
+  @media (max-width: 990px) {
+    font-size: 14px;
+  }
+  @media (max-width: 575px) {
+    font-size: 13px;
+  }
+`;
+
 export const PostPreview = styled.div`
   margin-top: 45px;
   position: relative;

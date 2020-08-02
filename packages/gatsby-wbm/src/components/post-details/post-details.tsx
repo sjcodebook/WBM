@@ -3,10 +3,13 @@ import Img from 'gatsby-image';
 import { Link } from 'gatsby';
 import _ from 'lodash';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
+import { Avatar } from '@material-ui/core';
+import SanmatiImage from '../../images/sanmati.jpg';
 import {
   PostDetailsWrapper,
   PostTitle,
   PostDate,
+  PostAuthor,
   PostPreview,
   PostDescriptionWrapper,
   PostDescription,
@@ -55,8 +58,24 @@ const PostDetails: React.FunctionComponent<PostDetailsProps> = ({
 
   return (
     <PostDetailsWrapper {...props} className={addClass.join(' ')}>
-      <PostTitle>{title}</PostTitle>
       <PostDate>{date}</PostDate>
+      <PostTitle>{title}</PostTitle>
+      <PostAuthor>
+        <div style={{ display: 'flex', float: 'left' }}>
+          <Avatar alt="Sanmati Kumar Jain" src={SanmatiImage} />
+        </div>
+        <div
+          style={{
+            display: 'inline-block',
+            marginLeft: '10px',
+            marginTop: '10px',
+          }}
+        >
+          <a href="https://twitter.com/jainsanmati846" target="_blank">
+            Sanmati Kumar Jain
+          </a>
+        </div>
+      </PostAuthor>
       {preview == null ? null : (
         <PostPreview className="post_preview">
           <Img fluid={preview} alt={title} backgroundColor={setColor} />
