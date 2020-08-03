@@ -13,8 +13,10 @@ const BlogList = (props: any) => {
   const isFirst = currentPage === 1;
   const isLast = currentPage === numPages;
   const prevPage =
-    currentPage - 1 === 1 ? '/page/1' : `/page/${(currentPage - 1).toString()}`;
-  const nextPage = `/page/${(currentPage + 1).toString()}`;
+    currentPage - 1 === 1
+      ? '/blogs/1'
+      : `/blogs/${(currentPage - 1).toString()}`;
+  const nextPage = `/blogs/${(currentPage + 1).toString()}`;
   const PrevLink = !isFirst && prevPage;
   const NextLink = !isLast && nextPage;
 

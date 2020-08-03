@@ -9,7 +9,7 @@ type PostsProps = {};
 const Posts: React.FunctionComponent<PostsProps> = () => {
   const Data = useStaticQuery(graphql`
     query {
-      allMdx(sort: { fields: [frontmatter___date], order: DESC }, limit: 6) {
+      allMdx(sort: { fields: [frontmatter___date], order: DESC }, limit: 10) {
         totalCount
         edges {
           node {

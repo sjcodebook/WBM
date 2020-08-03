@@ -3,6 +3,7 @@ import { useStaticQuery, graphql, Link } from 'gatsby';
 import _ from 'lodash';
 // import Img from 'gatsby-image';
 import FeaturePost from '../../components/feature-post/feature-post';
+import Constants from '../../constants/constants';
 // import PromotionImage from '../../images/ad.png';
 import {
   SidebarWrapper,
@@ -12,6 +13,11 @@ import {
   // InstagramWrapper,
   // InstagramPhoto,
 } from './style';
+
+import Card from '@material-ui/core/Card';
+// import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 
 type SidebarProps = {};
 
@@ -54,6 +60,7 @@ const Sidebar: React.FunctionComponent<SidebarProps> = () => {
 
   const Posts = Data.allMdx.edges;
   const Tags = Data.allMdx.group;
+  const randomNum = Math.floor(Math.random() * Constants.quotes.length);
 
   return (
     <SidebarWrapper>
@@ -67,7 +74,6 @@ const Sidebar: React.FunctionComponent<SidebarProps> = () => {
           <img src={PromotionImage} alt="Get StoryHub" />
         </a>
       </SidebarWidget> */}
-
       <SidebarWidget>
         <WidgetTitle>Latest Post</WidgetTitle>
         {Posts.map(({ node }: any) => {
@@ -106,6 +112,22 @@ const Sidebar: React.FunctionComponent<SidebarProps> = () => {
           );
         })}
       </SidebarWidget>
+      <SidebarWidget>
+        <WidgetTitle>Random Quote</WidgetTitle>
+        <Card style={{ minWidth: 275, background: '#f5f7fa' }} raised>
+          <CardContent>
+            <Typography variant="h5" component="h2">
+              {Constants.quotes[randomNum].quote}
+            </Typography>
+            <Typography color="textSecondary">
+              - {Constants.quotes[randomNum].author}
+            </Typography>
+          </CardContent>
+          {/* <CardActions>
+            <Button size="small">Learn More</Button>
+          </CardActions> */}
+        </Card>
+      </SidebarWidget>
 
       <SidebarWidget>
         <WidgetTitle>Tags</WidgetTitle>
@@ -118,7 +140,6 @@ const Sidebar: React.FunctionComponent<SidebarProps> = () => {
           </TagItem>
         ))}
       </SidebarWidget>
-
       {/* <SidebarWidget>
         <WidgetTitle>Instagram</WidgetTitle>
         {InstagramPhotos ? (
