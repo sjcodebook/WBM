@@ -1,9 +1,399 @@
 ---
-title: 'React Hooks Explained: useEffect( )'
-date: '2020-08-03T23:46:37.121Z'
+title: 'React Hooks Explained: useEffect( ) (By Building A Corona Tracker App)'
+date: '2020-08-06T23:46:37.121Z'
 cover: './cover.png'
-description: Learn useEffect Hook In Under 10 Minutes.
+description: Learn useEffect Hook By Building A Corona Tracker App In Under 10 Minutes.
 tags: ['reactjs', 'react-hooks', 'featured']
 slug: 'react-hooks-explained-useEffect'
 visibility: true
 ---
+
+import { CoronaApp, CoronaApp1, CoronaApp2, CoronaApp3 } from './examples.jsx';
+
+In the previous article, I talked about the `useState` react hook. In this article, We will talk about the `useEffect` hook. which gives us the combined ability of these three famous React class lifecycle methods => `componentDidMount`, `componentDidUpdate` and `componentWillUnmount`. So, Lets start exploring this powerful hook by building a Coronavirus Tracker Application.
+
+# The Coronavirus Tracker App
+
+Let's start by first defining the basic React functional component.
+
+```jsx
+import React from 'react';
+
+export const CoronaApp = () => {
+  const renderButtons = () => {
+    return (
+      <div>
+        <button style={{ margin: '5px' }}>Worldwide</button>
+        <button style={{ margin: '5px' }}>USA</button>
+        <button style={{ margin: '5px' }}>India</button>
+        <button style={{ margin: '5px' }}>China</button>
+      </div>
+    );
+  };
+
+  return (
+    <div>
+      <h2>Corona Tracker</h2>
+      {renderButtons()}
+    </div>
+  );
+};
+```
+
+<br />
+
+#### Output:
+
+<div className="grey-bg">
+  <CoronaApp1 />
+</div>
+
+<br />
+
+Now, let's define two states =>
+
+<ul>
+  <li>data: To store the tracking data that is fetched from the API</li>
+  <li>region: To store the current region</li>
+</ul>
+
+```jsx{1,4-5,12-14,20-22,28-30,36-38,50}
+import React, { useState } from 'react';
+
+export const CoronaApp = () => {
+  const [data, setData] = useState({});
+  const [region, setRegion] = useState('all');
+
+  const renderButtons = () => {
+    return (
+      <div>
+        <button
+          style={{ margin: '5px' }}
+          onClick={() => {
+            setRegion('all');
+          }}
+        >
+          Worldwide
+        </button>
+        <button
+          style={{ margin: '5px' }}
+          onClick={() => {
+            setRegion('usa');
+          }}
+        >
+          USA
+        </button>
+        <button
+          style={{ margin: '5px' }}
+          onClick={() => {
+            setRegion('india');
+          }}
+        >
+          India
+        </button>
+        <button
+          style={{ margin: '5px' }}
+          onClick={() => {
+            setRegion('china');
+          }}
+        >
+          China
+        </button>
+      </div>
+    );
+  };
+
+  return (
+    <div>
+      <h2>Corona Tracker</h2>
+      {renderButtons()}
+      <h4 style={{ marginTop: '10px' }}>{region.toUpperCase()}</h4>
+    </div>
+  );
+};
+```
+
+<br />
+
+#### Output:
+
+<div className="grey-bg">
+  <CoronaApp2 />
+</div>
+
+<br />
+
+Now, We will use `axios` to fetch the data from the API inside our `useEffect` hook. But before that, Let's first look at the basic usage of `useEffect`.
+
+The most basic way to use the `useEffect` hook is by passing a single function as its argument like this =>
+
+```jsx
+useEffect(() => {
+  console.log('I will run on every render');
+});
+```
+
+<br />
+
+By defining `useEffect` like this, Makes this hook behave like `componentDidUpdate` lifecycle method meaning it will run on every single render of our functional component.
+
+To make the `useEffect` to behave like `componentDidMount` i.e. Make it to run only on the first render of our functional component. We need to pass an empty array as the second argument in the `useEffect` hook like this =>
+
+```jsx
+useEffect(() => {
+  console.log('I will run only on first render');
+}, []);
+```
+
+<br />
+
+We can also pass a value in the array. By doing this, We are depending the running of `useEffect` hook on the state of the value passed. Like if we take an example of our corona tracker app, We want our `useEffect` to only run when the value of the `region` changes. So, We will define our `useEffect` hook like this =>
+
+```jsx
+useEffect(() => {
+  // Data fetching from the API
+}, [region]);
+```
+
+<br />
+
+Okay! So now let's get back to our tracker app and use the `useEffect` hook to fetch the data from the API.
+
+```jsx{1-2,8-18,64-72}
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+export const CoronaApp = () => {
+  const [data, setData] = useState({});
+  const [region, setRegion] = useState('all');
+
+  useEffect(() => {
+    axios
+      .get(
+        region === 'all'
+          ? `https://corona.lmao.ninja/v2/${region}`
+          : `https://corona.lmao.ninja/v2/countries/${region}`
+      )
+      .then((res) => {
+        setData(res.data);
+      });
+  }, [region]);
+
+  const renderButtons = () => {
+    return (
+      <div>
+        <button
+          style={{ margin: '5px' }}
+          onClick={() => {
+            setRegion('all');
+          }}
+        >
+          Worldwide
+        </button>
+        <button
+          style={{ margin: '5px' }}
+          onClick={() => {
+            setRegion('usa');
+          }}
+        >
+          USA
+        </button>
+        <button
+          style={{ margin: '5px' }}
+          onClick={() => {
+            setRegion('india');
+          }}
+        >
+          India
+        </button>
+        <button
+          style={{ margin: '5px' }}
+          onClick={() => {
+            setRegion('china');
+          }}
+        >
+          China
+        </button>
+      </div>
+    );
+  };
+
+  return (
+    <div>
+      <h2>Corona Tracker</h2>
+      {renderButtons()}
+      <h4 style={{ marginTop: '10px' }}>{region.toUpperCase()}</h4>
+      <ul>
+        {Object.keys(data).map((key, i) => {
+          return (
+            <li key={i}>
+              {key} : {typeof data[key] !== 'object' ? data[key] : ''}
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+};
+```
+
+<br />
+
+#### Output:
+
+<div className="grey-bg">
+  <CoronaApp3 />
+</div>
+
+<br />
+
+Lets Quickly also add a collapse info button.
+
+```jsx{7,9,58-65,78-86}
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+export const CoronaApp = () => {
+  const [data, setData] = useState({});
+  const [region, setRegion] = useState('all');
+  const [inDetail, setInDetail] = useState(false);
+
+  const dataLen = Object.keys(data).length;
+
+  useEffect(() => {
+    axios
+      .get(
+        region === 'all'
+          ? `https://corona.lmao.ninja/v2/${region}`
+          : `https://corona.lmao.ninja/v2/countries/${region}`
+      )
+      .then((res) => {
+        setData(res.data);
+      });
+  }, [region]);
+
+  const renderButtons = () => {
+    return (
+      <div>
+        <button
+          style={{ margin: '5px' }}
+          onClick={() => {
+            setRegion('all');
+          }}
+        >
+          Worldwide
+        </button>
+        <button
+          style={{ margin: '5px' }}
+          onClick={() => {
+            setRegion('usa');
+          }}
+        >
+          USA
+        </button>
+        <button
+          style={{ margin: '5px' }}
+          onClick={() => {
+            setRegion('india');
+          }}
+        >
+          India
+        </button>
+        <button
+          style={{ margin: '5px' }}
+          onClick={() => {
+            setRegion('china');
+          }}
+        >
+          China
+        </button>
+        <button
+          style={{ margin: '5px' }}
+          onClick={() => {
+            setInDetail(!inDetail);
+          }}
+        >
+          {inDetail ? 'Show Less' : 'Show More'}
+        </button>
+      </div>
+    );
+  };
+
+  return (
+    <div>
+      <h2>Corona Tracker</h2>
+      {renderButtons()}
+      <h4 style={{ marginTop: '10px' }}>{region.toUpperCase()}</h4>
+      <ul>
+        {Object.keys(data).map((key, i) => {
+          return (
+            <span key={i}>
+              {i < (!inDetail ? 10 : dataLen) ? (
+                <li key={i}>
+                  {key} : {typeof data[key] !== 'object' ? data[key] : ''}
+                </li>
+              ) : (
+                ''
+              )}
+            </span>
+          );
+        })}
+      </ul>
+    </div>
+  );
+};
+```
+
+<br />
+
+#### Output:
+
+<div className="grey-bg">
+  <CoronaApp />
+</div>
+
+<br />
+
+Now, If you open the `developer console` and go to the `network` tab, you will notice that when you click on the 'Show Less/Show More' button, the `useEffect` will not run. It will only run when you change the value of the `region` by clicking on any country button. That is happening because we passed the value of `region` in the array as the second argument of our `useEffect` hook. If we remove the `region` from the array it will run only the first time and if we remove the array then, it will run everytime on every state change event.
+
+# `useEffect` Clean Up
+
+If you have used React then, you must be familiar with this warning that comes up in the console
+
+<div style={{ color: 'red' }} className="grey-bg">
+  Can't perform a React state update on an unmounted component. This is a no-op,
+  but it indicates a memory leak in your application. To fix, cancel all
+  subscriptions and asynchronous tasks in a useEffect cleanup function.
+</div>
+
+This message is simply saying to us that please don't try to change the state of a component which has already been unmounted and its unavailable.
+
+This error is very common when we subscribe to a service but forgot to unsubscribe or a component gets unmounted before finishing our async operation. To prevent this we can run a cleanup inside our `useEffect` hook.
+
+To do a cleanup, Simply return a function within the method in the `useEffect` hook like this =>
+
+```jsx{4-6}
+useEffect(() => {
+  console.log('Doing some task like subscribing to a service');
+
+  return () => {
+    console.log('Cleaning up like unsubscribing to a service');
+  };
+});
+```
+
+<br />
+
+If you observe the console you will see the running pattern like this =>
+
+#### Output:
+
+![Clean Up](cleanup.png 'Clean Up')
+
+<br />
+
+You can see that the cleanup will run before the task in `useEffect` skipping the first run of the `useEffect` hook. The cleanup will also run when the component will get unmounted.
+
+Thats it, that is all you need to know about the `useEffect` hook. If you like my articles please consider liking, commenting and sharing them.
+
+Cheers 🍻!!

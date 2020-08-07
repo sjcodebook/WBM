@@ -214,6 +214,21 @@ const Constants = {
         'Never give up. Never let things out of your control dictate who you are.',
       author: 'Unknown',
     },
+    {
+      quote:
+        "Stupid man's opinion on what a clever man says is always wrong bcoz he unconsciously translates that to what he can understand.",
+      author: 'Unknown',
+    },
+    {
+      quote:
+        'A SEED GROWS WITH NO SOUND BUT A TREE FALLS WITH A HUGE NOISE. DESTRUCTION HAS NOISE, BUT CREATION IS QUITE. THIS IS POWER OF SILENCE.',
+      author: 'Swami Vivekananda',
+    },
+    {
+      quote:
+        'Every lie we tell incurs a debt to the truth. Sooner or later that debt is paid.',
+      author: 'Chernobyl TV Series',
+    },
   ],
 };
 
