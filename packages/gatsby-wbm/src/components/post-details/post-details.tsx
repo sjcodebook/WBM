@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import Img from 'gatsby-image';
 import { Link } from 'gatsby';
 import _ from 'lodash';
@@ -34,7 +34,29 @@ const PostDetails: React.FunctionComponent<PostDetailsProps> = ({
   className,
   ...props
 }) => {
+  const [authorTag, setAuthorTag]: any = useState(null);
   const addClass: string[] = ['post_details'];
+
+  useEffect(() => {
+    setAuthorTag(
+      <PostAuthor>
+        <div style={{ display: 'flex', float: 'left' }}>
+          <Avatar alt="Sanmati Kumar Jain" src={SanmatiImage} />
+        </div>
+        <div
+          style={{
+            display: 'inline-block',
+            marginLeft: '10px',
+            marginTop: '10px',
+          }}
+        >
+          <a href="https://twitter.com/jainsanmati846" target="_blank">
+            Sanmati Kumar Jain
+          </a>
+        </div>
+      </PostAuthor>
+    );
+  }, []);
 
   if (className) {
     addClass.push(className);
@@ -60,22 +82,7 @@ const PostDetails: React.FunctionComponent<PostDetailsProps> = ({
     <PostDetailsWrapper {...props} className={addClass.join(' ')}>
       <PostDate>{date}</PostDate>
       <PostTitle>{title}</PostTitle>
-      <PostAuthor>
-        <div style={{ display: 'flex', float: 'left' }}>
-          <Avatar alt="Sanmati Kumar Jain" src={SanmatiImage} />
-        </div>
-        <div
-          style={{
-            display: 'inline-block',
-            marginLeft: '10px',
-            marginTop: '10px',
-          }}
-        >
-          <a href="https://twitter.com/jainsanmati846" target="_blank">
-            Sanmati Kumar Jain
-          </a>
-        </div>
-      </PostAuthor>
+      {authorTag}
       {preview == null ? null : (
         <PostPreview className="post_preview">
           <Img fluid={preview} alt={title} backgroundColor={setColor} />
