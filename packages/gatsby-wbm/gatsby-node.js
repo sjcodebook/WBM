@@ -3,7 +3,7 @@ const _ = require('lodash');
 const { createFilePath } = require(`gatsby-source-filesystem`);
 
 exports.createPages = ({ graphql, actions }) => {
-  const { createPage } = actions;
+  const { createPage, createRedirect } = actions;
 
   const blogPost = path.resolve(`./src/templates/blog-post.tsx`);
   const blogList = path.resolve(`./src/templates/blog-list.tsx`);
@@ -92,6 +92,20 @@ exports.createPages = ({ graphql, actions }) => {
           tag,
         },
       });
+    });
+
+    createRedirect({
+      fromPath: '/blogs/react-hooks-explained-useEffect',
+      isPermanent: true,
+      redirectInBrowser: true,
+      toPath: '/blogs/react-hooks-explained-useEffect-hook',
+    });
+
+    createRedirect({
+      fromPath: '/blogs/react-hooks-explained-useEffect/',
+      isPermanent: true,
+      redirectInBrowser: true,
+      toPath: '/blogs/react-hooks-explained-useEffect-hook',
     });
 
     return null;
