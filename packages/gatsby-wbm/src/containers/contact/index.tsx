@@ -28,7 +28,7 @@ const encode = (data: any) => {
     .join('&');
 };
 
-const Contact: React.SFC<{}> = () => {
+const Contact: React.FunctionComponent<{}> = () => {
   return (
     <Formik
       initialValues={{ firstName: '', email: '', message: '' }}
@@ -47,8 +47,9 @@ const Contact: React.SFC<{}> = () => {
           })
           .finally(() => actions.setSubmitting(false));
       }}
-      validationSchema={SignupSchema}
-      render={({
+      validationSchema={SignupSchema} 
+    >
+      {({
         handleChange,
         values,
         errors,
@@ -115,7 +116,7 @@ const Contact: React.SFC<{}> = () => {
           </Form>
         </>
       )}
-    />
+      </Formik>
   );
 };
 

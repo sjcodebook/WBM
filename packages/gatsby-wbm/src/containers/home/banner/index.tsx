@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import FeaturePost from '../../../components/feature-post/feature-post';
 import { BannerWrapper, BannerInner, FeaturePosts, Title } from './style';
@@ -71,7 +71,7 @@ const Banner: React.FunctionComponent<BannerProps> = () => {
               ];
 
             return (
-              <>
+              <Fragment key={node.fields.slug}>
                 {visibility ? (
                   <FeaturePost
                     key={node.fields.slug}
@@ -88,7 +88,7 @@ const Banner: React.FunctionComponent<BannerProps> = () => {
                 ) : (
                   ''
                 )}
-              </>
+              </Fragment>
             );
           })}
         </FeaturePosts>

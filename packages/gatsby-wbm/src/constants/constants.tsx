@@ -229,6 +229,90 @@ const Constants = {
         'Every lie we tell incurs a debt to the truth. Sooner or later that debt is paid.',
       author: 'Chernobyl TV Series',
     },
+    {
+      quote: 'Who looks outside, Dreams. Who looks inside, Awakes.',
+      author: 'Carl Jung',
+    },
+    {
+      quote:
+        'You have brains in your head, you have feet in your shoes, You can steer yourself any direction you choose',
+      author: 'dr. Sues',
+    },
+    {
+      quote:
+        'All our dreams can come true, if we have the courage to pursue them.',
+      author: 'Walt Disney',
+    },
+    {
+      quote: 'The secret of getting ahead is getting started.',
+      author: 'Mark Twain',
+    },
+    {
+      quote:
+        'I’ve missed more than 9,000 shots in my career. I’ve lost almost 300 games. 26 times I’ve been trusted to take the game winning shot and missed. I’ve failed over and over and over again in my life and that is why I succeed.',
+      author: 'Michael Jordan',
+    },
+    {
+      quote:
+        'Don’t limit yourself. Many people limit themselves to what they think they can do. You can go as far as your mind lets you. What you believe, remember, you can achieve.',
+      author: 'Mary Kay Ash',
+    },
+    {
+      quote:
+        'The best time to plant a tree was 20 years ago. The second best time is now.',
+      author: 'Chinese Proverb',
+    },
+    {
+      quote: 'It’s hard to beat a person who never gives up.',
+      author: 'Babe Ruth',
+    },
+    {
+      quote:
+        'If people are doubting how far you can go, go so far that you can’t hear them anymore.',
+      author: 'Michele Ruiz',
+    },
+    {
+      quote:
+        'We need to accept that we won’t always make the right decisions, that we’ll screw up royally sometimes – understanding that failure is not the opposite of success, it’s part of success.',
+      author: 'Arianna Huffington',
+    },
+    {
+      quote: 'Everything you can imagine is real.',
+      author: 'Pablo Picasso',
+    },
+    {
+      quote:
+        'When one door of happiness closes, another opens; but often we look so long at the closed door that we do not see the one which has been opened for us.',
+      author: 'Helen Keller',
+    },
+    {
+      quote: 'Do one thing every day that scares you.',
+      author: 'Eleanor Roosevelt',
+    },
+    {
+      quote:
+        'Smart people learn from everything and everyone, average people from their experiences, stupid people already have all the answers.',
+      author: 'Socrates',
+    },
+    {
+      quote:
+        'Do what you feel in your heart to be right – for you’ll be criticized anyway.',
+      author: 'Eleanor Roosevelt',
+    },
+    {
+      quote:
+        'Happiness is not something ready made. It comes from your own actions.',
+      author: 'Dalai Lama XIV',
+    },
+    {
+      quote: 'Whatever you are, be a good one.',
+      author: 'Abraham Lincoln',
+    },
+    {
+      quote:
+        'We have two lives. The second one begins when we realise that we have only one',
+      author: 'Confucius',
+    },
   ],
 };
 

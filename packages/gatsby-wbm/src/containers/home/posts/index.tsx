@@ -66,7 +66,7 @@ const Posts: React.FunctionComponent<PostsProps> = () => {
             ];
 
           return (
-            <>
+            <React.Fragment key={node.fields.slug}>
               {visibility ? (
                 <PostGrid key={node.fields.slug}>
                   <PostCardModern
@@ -87,12 +87,12 @@ const Posts: React.FunctionComponent<PostsProps> = () => {
               ) : (
                 ''
               )}
-            </>
+            </React.Fragment>
           );
         })}
       </PostRow>
       <SeeMore>
-        <Link to="blogs/1">
+        <Link to={"/blogs/1"}>
           <Button title="See more" type="submit" />
         </Link>
       </SeeMore>

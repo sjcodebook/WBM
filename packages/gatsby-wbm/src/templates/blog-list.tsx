@@ -45,7 +45,7 @@ const BlogList = (props: any) => {
                 Math.floor(Math.random() * placeholderColors.length)
               ];
             return (
-              <>
+              <React.Fragment key={node.fields.slug}>
                 {node.frontmatter.visibility ? (
                   <PostGrid>
                     <PostCardModern
@@ -66,7 +66,7 @@ const BlogList = (props: any) => {
                 ) : (
                   ''
                 )}
-              </>
+              </React.Fragment>
             );
           })}
         </PostRow>
