@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Sticky from 'react-stickynode';
 import { ThemeProvider } from 'styled-components';
 import ScrollToTop from 'react-scroll-up';
@@ -16,6 +16,12 @@ type LayoutProps = {
 };
 
 const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
+  const [showSocialTray, setShowSocialTray] = useState(false)
+
+  useEffect(() => {
+    setShowSocialTray(true)
+  }, [])
+
   return (
     <ThemeProvider theme={theme}>
       <>
@@ -51,7 +57,8 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
         >
           <ScrollUpButton />
         </ScrollToTop>
-        <SpeedDialTooltipOpen />
+        {showSocialTray ? 
+          <SpeedDialTooltipOpen /> : ''}
       </>
     </ThemeProvider>
   );
