@@ -1,5 +1,7 @@
 import React from 'react';
 import { useStaticQuery, graphql, Link } from 'gatsby';
+import { FacebookProvider, Like, Page } from 'react-facebook';
+import { TwitterTimelineEmbed, TwitterFollowButton } from 'react-twitter-embed';
 import _ from 'lodash';
 // import Img from 'gatsby-image';
 import FeaturePost from '../../components/feature-post/feature-post';
@@ -74,6 +76,26 @@ const Sidebar: React.FunctionComponent<SidebarProps> = () => {
           <img src={PromotionImage} alt="Get StoryHub" />
         </a>
       </SidebarWidget> */}
+      <SidebarWidget>
+        <WidgetTitle>Facebook Page 👍</WidgetTitle>
+        <FacebookProvider appId="3596829363695428">
+          <Like href="http://www.facebook.com/webbrainsmedia" showFaces share />
+          <br />
+          <Page href="https://www.facebook.com/webbrainsmedia" tabs="timeline" />
+        </FacebookProvider> 
+      </SidebarWidget>
+      <SidebarWidget>
+        <WidgetTitle>Twitter 🐦</WidgetTitle>
+        <TwitterFollowButton
+          screenName={'jainsanmati846'}
+        />
+        <TwitterTimelineEmbed
+          sourceType="profile"
+          screenName="jainsanmati846"
+          options={{height: 400}}
+          noFooter
+        />
+      </SidebarWidget>
       <SidebarWidget>
         <WidgetTitle>Latest Post</WidgetTitle>
         {Posts.map(({ node }: any) => {
