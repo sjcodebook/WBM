@@ -25,6 +25,7 @@ export const SidebarWrapper = styled.div`
 `;
 
 export const SidebarWidget = styled.div`
+  overflow: auto;
   position: relative;
   padding: 30px;
   border: 1px solid #e6e6e6;
