@@ -9,6 +9,7 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import TelegramIcon from '@material-ui/icons/Telegram';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,6 +35,7 @@ export default function SpeedDialTooltipOpen() {
   const [icon, setIcon] = React.useState(<FavoriteBorderIcon />);
 
   const SocialLinks: any = {
+    Telegram: 'https://t.me/webbrainsmedia',
     Facebook: 'https://www.facebook.com/webbrainsmedia',
     Instagram: 'https://www.instagram.com/webbrainsmedia/',
     Twitter: 'https://twitter.com/jainsanmati846',
@@ -41,6 +43,15 @@ export default function SpeedDialTooltipOpen() {
   };
 
   const actions = [
+    {
+      icon: (
+        <TelegramIcon
+          style={{ fill: '#0088cc' }}
+          onClick={() => handleClick('Telegram')}
+        />
+      ),
+      name: 'Telegram',
+    },
     {
       icon: (
         <FacebookIcon

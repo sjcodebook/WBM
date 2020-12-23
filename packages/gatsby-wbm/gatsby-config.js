@@ -14,6 +14,7 @@ module.exports = {
   },
   plugins: [
     `gatsby-remark-images`,
+    `gatsby-plugin-preload-fonts`,
     {
       resolve: `gatsby-plugin-styled-components`,
       options: {
@@ -190,21 +191,6 @@ module.exports = {
         // username: ,
         // access_token: ,
         // instagram_id: ,
-      },
-    },
-    {
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
-      options: {
-        fonts: [
-          {
-            family: `Poppins`,
-            variants: [`300`, `400`, `500`, `600`, `700`],
-          },
-          {
-            family: `Fira Sans`,
-            variants: [`100`, `300`, `400`, `500`, `600`, `700`],
-          },
-        ],
       },
     },
   ],

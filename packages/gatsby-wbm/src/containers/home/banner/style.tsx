@@ -2,6 +2,17 @@ import styled from 'styled-components';
 import { themeGet } from '@styled-system/theme-get';
 import BannerBG from '../../../images/banner-bg.jpg';
 
+export const AnnouncementWrapper = styled.div`
+  position: relative;
+  padding: 20px;
+  background-color: #212121;
+  background-position: center;
+  min-height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const BannerWrapper = styled.div`
   position: relative;
   padding: 90px 0;
