@@ -8,6 +8,7 @@ import {
   IoLogoInstagram,
   IoLogoLinkedin,
 } from 'react-icons/io';
+import { FaTelegramPlane } from 'react-icons/fa';
 import {
   AboutWrapper,
   AboutImage,
@@ -36,6 +37,11 @@ const SocialLinks = [
     icon: <IoLogoLinkedin />,
     url: 'https://www.linkedin.com/in/sjcodebook/',
     tooltip: 'Linked In',
+  },
+  {
+    icon: <FaTelegramPlane />,
+    url: 'https://t.me/webbrainsmedia',
+    tooltip: 'Telegram',
   },
 ];
 

@@ -1,7 +1,16 @@
 import React, { Fragment } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
+import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
+import TelegramIcon from '@material-ui/icons/Telegram';
 import FeaturePost from '../../../components/feature-post/feature-post';
-import { BannerWrapper, BannerInner, FeaturePosts, Title } from './style';
+import {
+  AnnouncementWrapper,
+  BannerWrapper,
+  BannerInner,
+  FeaturePosts,
+  Title,
+} from './style';
 
 type BannerProps = {};
 
@@ -43,57 +52,72 @@ const Banner: React.FunctionComponent<BannerProps> = () => {
   const Posts = Data.allMdx.edges;
 
   return (
-    <BannerWrapper>
-      <BannerInner>
-        <FeaturePosts>
-          <Title>Featured Posts</Title>
-          {Posts.map(({ node }: any) => {
-            const title = node.frontmatter.title || node.fields.slug;
-            const visibility = node.frontmatter.visibility
-              ? node.frontmatter.visibility
-              : false;
-            // Random Placeholder Color
-            const placeholderColors = [
-              '#55efc4',
-              '#81ecec',
-              '#74b9ff',
-              '#a29bfe',
-              '#ffeaa7',
-              '#fab1a0',
-              '#e17055',
-              '#0984e3',
-              '#badc58',
-              '#c7ecee',
-            ];
-            const setColor =
-              placeholderColors[
-                Math.floor(Math.random() * placeholderColors.length)
+    <>
+      <AnnouncementWrapper>
+        <Typography variant="h5">
+          <Link
+            href="https://t.me/webbrainsmedia"
+            target="_blank"
+            rel="noopener"
+            style={{ color: '#e05a7b', textDecoration: 'none' }}
+          >
+            Join The Exclusive Telegram Developer Channel For Free By Clicking
+            Here (500+ Awesome Devs Already Joined) <TelegramIcon />
+          </Link>
+        </Typography>
+      </AnnouncementWrapper>
+      <BannerWrapper>
+        <BannerInner>
+          <FeaturePosts>
+            <Title>Featured Posts</Title>
+            {Posts.map(({ node }: any) => {
+              const title = node.frontmatter.title || node.fields.slug;
+              const visibility = node.frontmatter.visibility
+                ? node.frontmatter.visibility
+                : false;
+              // Random Placeholder Color
+              const placeholderColors = [
+                '#55efc4',
+                '#81ecec',
+                '#74b9ff',
+                '#a29bfe',
+                '#ffeaa7',
+                '#fab1a0',
+                '#e17055',
+                '#0984e3',
+                '#badc58',
+                '#c7ecee',
               ];
+              const setColor =
+                placeholderColors[
+                  Math.floor(Math.random() * placeholderColors.length)
+                ];
 
-            return (
-              <Fragment key={node.fields.slug}>
-                {visibility ? (
-                  <FeaturePost
-                    key={node.fields.slug}
-                    title={title}
-                    image={
-                      node.frontmatter.cover == null
-                        ? null
-                        : node.frontmatter.cover.childImageSharp.fluid
-                    }
-                    url={node.fields.slug}
-                    tags={node.frontmatter.tags}
-                    placeholderBG={setColor}
-                  />
-                ) : (
-                  ''
-                )}
-              </Fragment>
-            );
-          })}
-        </FeaturePosts>
-      </BannerInner>
-    </BannerWrapper>
+              return (
+                <Fragment key={node.fields.slug}>
+                  {visibility ? (
+                    <FeaturePost
+                      key={node.fields.slug}
+                      title={title}
+                      image={
+                        node.frontmatter.cover == null
+                          ? null
+                          : node.frontmatter.cover.childImageSharp.fluid
+                      }
+                      url={node.fields.slug}
+                      tags={node.frontmatter.tags}
+                      placeholderBG={setColor}
+                    />
+                  ) : (
+                    ''
+                  )}
+                </Fragment>
+              );
+            })}
+          </FeaturePosts>
+        </BannerInner>
+      </BannerWrapper>
+    </>
   );
 };
 
