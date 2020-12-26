@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
@@ -15,6 +15,26 @@ import {
 type BannerProps = {};
 
 const Banner: React.FunctionComponent<BannerProps> = () => {
+  const [announcement, setAnnouncement]: any = useState(null);
+
+  useEffect(() => {
+    setAnnouncement(() => (
+      <AnnouncementWrapper>
+        <Typography variant="h5">
+          <Link
+            href="https://t.me/webbrainsmedia"
+            target="_blank"
+            rel="noopener"
+            style={{ color: '#e05a7b', textDecoration: 'none' }}
+          >
+            Join The Exclusive Telegram Developer Channel For Free By Clicking
+            Here (500+ Awesome Devs Already Joined) <TelegramIcon />
+          </Link>
+        </Typography>
+      </AnnouncementWrapper>
+    ));
+  }, []);
+
   const Data = useStaticQuery(graphql`
     query {
       allMdx(
@@ -53,19 +73,7 @@ const Banner: React.FunctionComponent<BannerProps> = () => {
 
   return (
     <>
-      <AnnouncementWrapper>
-        <Typography variant="h5">
-          <Link
-            href="https://t.me/webbrainsmedia"
-            target="_blank"
-            rel="noopener"
-            style={{ color: '#e05a7b', textDecoration: 'none' }}
-          >
-            Join The Exclusive Telegram Developer Channel For Free By Clicking
-            Here (500+ Awesome Devs Already Joined) <TelegramIcon />
-          </Link>
-        </Typography>
-      </AnnouncementWrapper>
+      {announcement}
       <BannerWrapper>
         <BannerInner>
           <FeaturePosts>
