@@ -17580,6 +17580,11 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
   integrity sha1-WuaBd/GS1EViadEIr6k/+HQ/T2Q=
 
+twitter-url-parser@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/twitter-url-parser/-/twitter-url-parser-0.0.1.tgz#86d1954b01d4c5de13e70a8812bd64b72a7c61da"
+  integrity sha1-htGVSwHUxd4T5wqIEr1ktyp8Ydo=
+
 type-check@~0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/type-check/-/type-check-0.3.2.tgz#5884cab512cf1d355e3fb784f30804b2b520db72"

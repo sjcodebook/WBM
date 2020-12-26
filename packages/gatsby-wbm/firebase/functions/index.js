@@ -1,9 +1,11 @@
+const cors = require('cors')({ origin: true });
 const functions = require('firebase-functions');
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
 exports.helloWorld = functions.https.onRequest((request, response) => {
-  // functions.logger.info('Hello logs!', { structuredData: true });
-  response.send('Hello from Firebase Yo!');
+  cors(request, response, () => {
+    // your function body here - use the provided req and res from cors
+    console.log(request.body);
+    // functions.logger.info('Hello logs!', { structuredData: true });
+    response.status(200).send({ message: 'msg' });
+  });
 });
