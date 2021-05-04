@@ -1,11 +1,12 @@
-import React from 'react';
-import { useStaticQuery, graphql, Link } from 'gatsby';
-import { FacebookProvider, Like, Page } from 'react-facebook';
-import { TwitterTimelineEmbed, TwitterFollowButton } from 'react-twitter-embed';
-import _ from 'lodash';
+import React from 'react'
+import { useStaticQuery, graphql, Link } from 'gatsby'
+import { FacebookProvider, Like, Page } from 'react-facebook'
+import { TwitterTimelineEmbed, TwitterFollowButton } from 'react-twitter-embed'
+import _ from 'lodash'
 // import Img from 'gatsby-image';
-import FeaturePost from '../../components/feature-post/feature-post';
-import Constants from '../../constants/constants';
+import FeaturePost from '../../components/feature-post/feature-post'
+import Constants from '../../constants/constants'
+import TelegramLogo from './../../images/telegram-logo.svg'
 // import PromotionImage from '../../images/ad.png';
 import {
   SidebarWrapper,
@@ -14,16 +15,34 @@ import {
   TagItem,
   // InstagramWrapper,
   // InstagramPhoto,
-} from './style';
+} from './style'
 
-import Card from '@material-ui/core/Card';
+import Card from '@material-ui/core/Card'
 // import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
+import CardContent from '@material-ui/core/CardContent'
+import Typography from '@material-ui/core/Typography'
+import { makeStyles } from '@material-ui/core/styles'
+import CardActionArea from '@material-ui/core/CardActionArea'
+import CardMedia from '@material-ui/core/CardMedia'
+import Button from '@material-ui/core/Button'
 
-type SidebarProps = {};
+const useStyles = makeStyles({
+  root: {
+    maxWidth: 350,
+    textAlign: 'center',
+    padding: 10,
+  },
+  media: {
+    height: 0,
+    paddingTop: '100%', // 16:9,
+    marginTop: '30',
+  },
+})
+
+type SidebarProps = {}
 
 const Sidebar: React.FunctionComponent<SidebarProps> = () => {
+  const classes = useStyles()
   const Data = useStaticQuery(graphql`
     query {
       allMdx(
@@ -58,11 +77,11 @@ const Sidebar: React.FunctionComponent<SidebarProps> = () => {
         }
       }
     }
-  `);
+  `)
 
-  const Posts = Data.allMdx.edges;
-  const Tags = Data.allMdx.group;
-  const randomNum = Math.floor(Math.random() * Constants.quotes.length);
+  const Posts = Data.allMdx.edges
+  const Tags = Data.allMdx.group
+  const randomNum = Math.floor(Math.random() * Constants.quotes.length)
 
   return (
     <SidebarWrapper>
@@ -73,33 +92,60 @@ const Sidebar: React.FunctionComponent<SidebarProps> = () => {
           aria-label="Get StoryHub"
           target="_blank"
         >
-          <img src={PromotionImage} alt="Get StoryHub" />
+        <img src={PromotionImage} alt="Get StoryHub" />
         </a>
       </SidebarWidget> */}
       <SidebarWidget>
+        <WidgetTitle>Telegram Dev Channel 💬</WidgetTitle>
+        <Card
+          className={classes.root}
+          onClick={() => window.open('https://t.me/webbrainsmedia', '_blank')}>
+          <CardActionArea>
+            <CardMedia
+              className={classes.media}
+              image={TelegramLogo}
+              title='Telegram Dev Channel'
+            />
+            <CardContent>
+              <Typography gutterBottom variant='h5' component='h2'>
+                WebBrainsMedia Official Channel
+              </Typography>
+              <Typography variant='body1' color='textPrimary' component='p'>
+                500+ members joined
+              </Typography>
+              <Typography variant='body2' color='textSecondary' component='p'>
+                In this channel i post about web/mobile development stuff that i learn and do on
+                daily basis.
+              </Typography>
+            </CardContent>
+            <Button variant='outlined' style={{ color: '#0088cc' }}>
+              Join The Channel Now
+            </Button>
+          </CardActionArea>
+        </Card>
+      </SidebarWidget>
+      <SidebarWidget>
         <WidgetTitle>Facebook Page 👍</WidgetTitle>
-        <FacebookProvider appId="3596829363695428">
-          <Like href="http://www.facebook.com/webbrainsmedia" showFaces share />
+        <FacebookProvider appId='3596829363695428'>
+          <Like href='http://www.facebook.com/webbrainsmedia' showFaces share />
           <br />
-          <Page href="https://www.facebook.com/webbrainsmedia" tabs="timeline" />
-        </FacebookProvider> 
+          <Page href='https://www.facebook.com/webbrainsmedia' tabs='timeline' />
+        </FacebookProvider>
       </SidebarWidget>
       <SidebarWidget>
         <WidgetTitle>Twitter 🐦</WidgetTitle>
-        <TwitterFollowButton
-          screenName={'jainsanmati846'}
-        />
+        <TwitterFollowButton screenName={'jainsanmati846'} />
         <TwitterTimelineEmbed
-          sourceType="profile"
-          screenName="jainsanmati846"
-          options={{height: 400}}
+          sourceType='profile'
+          screenName='jainsanmati846'
+          options={{ height: 400 }}
           noFooter
         />
       </SidebarWidget>
       <SidebarWidget>
         <WidgetTitle>Latest Post</WidgetTitle>
         {Posts.map(({ node }: any) => {
-          const title = node.frontmatter.title || node.fields.slug;
+          const title = node.frontmatter.title || node.fields.slug
           // Random Placeholder Color
           const placeholderColors = [
             '#55efc4',
@@ -112,38 +158,31 @@ const Sidebar: React.FunctionComponent<SidebarProps> = () => {
             '#0984e3',
             '#badc58',
             '#c7ecee',
-          ];
-          const setColor =
-            placeholderColors[
-              Math.floor(Math.random() * placeholderColors.length)
-            ];
+          ]
+          const setColor = placeholderColors[Math.floor(Math.random() * placeholderColors.length)]
 
           return (
             <FeaturePost
               key={node.fields.slug}
               title={title}
               image={
-                node.frontmatter.cover == null
-                  ? null
-                  : node.frontmatter.cover.childImageSharp.fluid
+                node.frontmatter.cover == null ? null : node.frontmatter.cover.childImageSharp.fluid
               }
               url={node.fields.slug}
               tags={node.frontmatter.tags}
               placeholderBG={setColor}
             />
-          );
+          )
         })}
       </SidebarWidget>
       <SidebarWidget>
         <WidgetTitle>Random Quote</WidgetTitle>
         <Card style={{ minWidth: 275, background: '#f5f7fa' }} raised>
           <CardContent>
-            <Typography variant="h5" component="h2">
+            <Typography variant='h5' component='h2'>
               {Constants.quotes[randomNum].quote}
             </Typography>
-            <Typography color="textSecondary">
-              - {Constants.quotes[randomNum].author}
-            </Typography>
+            <Typography color='textSecondary'>- {Constants.quotes[randomNum].author}</Typography>
           </CardContent>
           {/* <CardActions>
             <Button size="small">Learn More</Button>
@@ -184,7 +223,6 @@ const Sidebar: React.FunctionComponent<SidebarProps> = () => {
                 placeholderColors[
                   Math.floor(Math.random() * placeholderColors.length)
                 ];
-
               return (
                 <InstagramPhoto key={node.id}>
                   <a
@@ -206,7 +244,7 @@ const Sidebar: React.FunctionComponent<SidebarProps> = () => {
         )}
       </SidebarWidget> */}
     </SidebarWrapper>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar
