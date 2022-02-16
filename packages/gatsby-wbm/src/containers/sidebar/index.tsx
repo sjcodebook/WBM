@@ -134,10 +134,10 @@ const Sidebar: React.FunctionComponent<SidebarProps> = () => {
       </SidebarWidget>
       <SidebarWidget>
         <WidgetTitle>Twitter 🐦</WidgetTitle>
-        <TwitterFollowButton screenName={'jainsanmati846'} />
+        <TwitterFollowButton screenName={'jainsahil846'} />
         <TwitterTimelineEmbed
           sourceType='profile'
-          screenName='jainsanmati846'
+          screenName='jainsahil846'
           options={{ height: 400 }}
           noFooter
         />

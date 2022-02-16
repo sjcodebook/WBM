@@ -4,7 +4,7 @@ import { Link } from 'gatsby';
 import _ from 'lodash';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { Avatar } from '@material-ui/core';
-import SanmatiImage from '../../images/sanmati.jpg';
+import SahilImage from '../../images/sahil.jpeg';
 import {
   PostDetailsWrapper,
   PostTitle,
@@ -41,7 +41,7 @@ const PostDetails: React.FunctionComponent<PostDetailsProps> = ({
     setAuthorTag(
       <PostAuthor>
         <div style={{ display: 'flex', float: 'left' }}>
-          <Avatar alt="Sanmati Kumar Jain" src={SanmatiImage} />
+          <Avatar alt="Sahil Jain" src={SahilImage} />
         </div>
         <div
           style={{
@@ -50,8 +50,8 @@ const PostDetails: React.FunctionComponent<PostDetailsProps> = ({
             marginTop: '10px',
           }}
         >
-          <a href="https://twitter.com/jainsanmati846" target="_blank">
-            Sanmati Kumar Jain
+          <a href="https://twitter.com/jainsahil846" target="_blank">
+            Sahil Jain
           </a>
         </div>
       </PostAuthor>

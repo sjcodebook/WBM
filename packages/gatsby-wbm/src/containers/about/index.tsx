@@ -30,7 +30,7 @@ const SocialLinks = [
   },
   {
     icon: <IoLogoTwitter />,
-    url: 'https://twitter.com/jainsanmati846',
+    url: 'https://twitter.com/jainsahil846',
     tooltip: 'Twitter',
   },
   {

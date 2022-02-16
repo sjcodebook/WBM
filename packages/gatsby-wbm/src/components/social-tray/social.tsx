@@ -38,7 +38,7 @@ export default function SpeedDialTooltipOpen() {
     Telegram: 'https://t.me/webbrainsmedia',
     Facebook: 'https://www.facebook.com/webbrainsmedia',
     Instagram: 'https://www.instagram.com/webbrainsmedia/',
-    Twitter: 'https://twitter.com/jainsanmati846',
+    Twitter: 'https://twitter.com/jainsahil846',
     LinkedIn: 'https://www.linkedin.com/in/sjcodebook/',
   };
 
