@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { themeGet } from '@styled-system/theme-get';
-import BannerBG from '../../../images/banner-bg.jpg';
+import styled from 'styled-components'
+import { themeGet } from '@styled-system/theme-get'
+import BannerBG from '../../../images/banner-bg.png'
 
 export const AnnouncementWrapper = styled.div`
   position: relative;
@@ -11,7 +11,7 @@ export const AnnouncementWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
+`
 
 export const BannerWrapper = styled.div`
   position: relative;
@@ -27,19 +27,19 @@ export const BannerWrapper = styled.div`
 
   @media (max-width: 1500px) {
     min-height: 700px;
-    padding: 80px 0;
+    padding: 20px 0;
   }
 
   @media (max-width: 990px) {
     min-height: 600px;
-    padding: 60px 0;
+    padding: 20px 0;
   }
 
   @media (max-width: 767px) {
     min-height: 300px;
-    padding: 40px 0;
+    padding: 20px 0;
   }
-`;
+`
 
 export const BannerInner = styled.div`
   margin: 0 auto;
@@ -60,7 +60,7 @@ export const BannerInner = styled.div`
     padding-left: 25px;
     padding-right: 25px;
   }
-`;
+`
 
 export const FeaturePosts = styled.div`
   width: 460px;
@@ -82,7 +82,7 @@ export const FeaturePosts = styled.div`
       margin-bottom: 0;
     }
   }
-`;
+`
 
 export const Title = styled.div`
   color: ${themeGet('colors.textColor', '#292929')};
@@ -101,4 +101,4 @@ export const Title = styled.div`
     display: block;
     margin-top: 8px;
   }
-`;
+`
